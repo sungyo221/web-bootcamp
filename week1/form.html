@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+  ============================================
+  1주차 연습 파일 (4) - 폼(Form)
+  ============================================
+  목표: form / label / input / textarea / button 으로 입력 양식을 만든다.
+  핵심: label의 for 와 input의 id 를 똑같이 맞춰 짝지어준다.
+
+  사용법: [TODO]를 채우고 저장(Ctrl+S) → 브라우저 새로고침(F5).
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>폼 연습 - 회원가입</title>
+  <style>
+    /* 보기 좋으라고 넣은 임시 스타일 (2주차에 배워요) */
+    body { font-family: sans-serif; max-width: 400px; margin: 30px auto; }
+    label { display: block; margin-top: 14px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 16px; padding: 10px 20px; cursor: pointer; }
+  </style>
+</head>
+
+<body>
+
+  <h1>회원가입</h1>
+
+  <form>
+
+    <!-- 1. 이름: text -->
+    <label for="name">이름</label>
+    <input type="text" id="name" placeholder="이름을 입력하세요">
+
+    <!-- 2. 이메일: email -->
+    <label for="email">이메일</label>
+    <input type="email" id="email" placeholder="example@email.com">
+
+    <!-- [TODO 1] 비밀번호 입력칸을 만들어보세요.
+         - label 글자: 비밀번호  (for="password")
+         - input 의 type 은 "password",  id 는 "password" -->
+    <label for="password">비밀번호</label>
+    <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+
+
+    <!-- [TODO 2] 자기소개 입력칸을 만들어보세요. (여러 줄이니 textarea 사용!)
+         - label 글자: 자기소개  (for="bio")
+         - <textarea id="bio"></textarea>  형태로 작성 -->
+    <label for="bio">자기소개</label>
+    <textarea id="bio"></textarea>
+
+
+    <!-- 3. 제출 버튼 -->
+    <button type="submit">가입하기</button>
+
+  </form>
+
+  <!-- [TODO 3] 도전: 위 input들의 type을 바꿔보며 관찰해보세요.
+       예) 이메일 칸의 type="email" 을 type="text"로 바꾸면 뭐가 달라질까?
+       (email은 @ 없이 제출하면 경고가 떠요!) -->
+
+</body>
+</html>

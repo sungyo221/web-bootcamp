@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  종합 복습 프로젝트 (1~4주차 전부!) - 습관 체커 ✅💪
+  ================================================================
+  HTML(구조) + CSS(디자인) + JS(기능) + localStorage(저장) 총정리.
+
+  각 [TODO] 에 "몇 주차 개념"인지 표시해 뒀어요.
+  순서대로 채우면 진짜 앱이 완성돼요. 막히면 해당 주차 summary.html 참고!
+
+  ★ 완성하면: 습관을 입력→추가→목록 표시, 새로고침해도 유지 ★
+-->
+<html lang="ko">
+<head>
+  <!-- [TODO 1] (1주차) 한글 안 깨지는 meta 태그 -->
+  <meta charset="UTF-8">
+
+  <title>습관 체커</title>
+
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;
+           line-height: 1.6; color: #1e293b; background: #f8fafc; }
+
+    /* [TODO 2] (2주차) header 를 메뉴바처럼!
+       - display: flex;
+       - justify-content: space-between;
+       - align-items: center;
+       - padding: 16px 20px;
+       - background-color: #6366f1;
+       - border-radius: 10px; */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background-color: #6366f1;
+      border-radius: 10px;
+    }
+
+    .logo { color: white; font-size: 20px; font-weight: bold; }
+    header .date { color: #e0e7ff; font-size: 14px; }
+
+    .input-row { display: flex; gap: 8px; margin: 20px 0; }
+    #habitInput { flex: 1; padding: 12px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 8px; }
+    #addBtn { padding: 12px 20px; border: none; border-radius: 8px; background: #6366f1;
+              color: white; cursor: pointer; font-size: 16px; }
+
+    /* [TODO 3] (2주차) 각 습관 항목(li) 카드 꾸미기
+       - display: flex;
+       - justify-content: space-between;
+       - align-items: center;
+       - background-color: white;
+       - padding: 14px 16px;
+       - margin: 8px 0;
+       - border-radius: 8px; */
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 14px 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    ul { list-style: none; padding: 0; }
+    li button { border: none; background: #ef4444; color: white; padding: 6px 12px;
+                border-radius: 6px; cursor: pointer; }
+    .empty { color: #94a3b8; text-align: center; padding: 20px; }
+    #count { text-align: center; color: #6366f1; font-weight: bold; margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- [TODO 4] (1주차) header 안에 들어갈 내용:
+       - <div class="logo">✅ 습관 체커</div>
+       - <div class="date">오늘도 화이팅!</div> -->
+  <header>
+    <div class="logo">✅ 습관 체커</div>'
+    <div class="data">오늘도 화이팅!</div>
+  </header>
+
+  <main>
+    <div class="input-row">
+      <!-- [TODO 5] (1주차) 입력창과 버튼:
+           - <input type="text" id="habitInput" placeholder="새 습관 입력">
+           - <button id="addBtn">추가</button> -->
+      <input type="text" id="habitInput" placeholder="새 습관 입력">
+      <button id="addBtn">추가</button>
+    </div>
+
+    <ul id="habitList"></ul>
+    <div id="count"></div>
+  </main>
+
+
+  <script>
+    /* ===== 요소 잡기 (3주차) ===== */
+    const habitInput = document.getElementById("habitInput");
+    const addBtn = document.getElementById("addBtn");
+    const habitList = document.getElementById("habitList");
+    const countBox = document.getElementById("count");
+
+    /* ===== 데이터 불러오기 (4주차 localStorage + JSON) ===== */
+    let habits = [];
+    const saved = localStorage.getItem("myHabits");
+    if (saved) {
+      habits = JSON.parse(saved);
+    }
+
+    /* ===== save(): 저장 (만들어 둠) ===== */
+    function save() {
+      localStorage.setItem("myHabits", JSON.stringify(habits));
+    }
+
+
+    /* ===== render(): 화면 그리기 ===== */
+    function render() {
+      habitList.innerHTML = "";
+
+      if (habits.length === 0) {
+        habitList.innerHTML = "<p class='empty'>아직 습관이 없어요. 하나 추가해보세요!</p>";
+      }
+
+      /* [TODO 6] (3주차 반복문 + 배열) habits 배열을 돌면서 <li> 만들기
+         아래 for 문의 조건을 채우세요:
+         - 시작: let i = 0
+         - 조건: i < habits.length
+         - 증가: i++ */
+      for (let i = 0; i < habits.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = (i + 1) + ". " + habits[i];
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "삭제";
+        delBtn.addEventListener("click", function() {
+          habits.splice(i, 1);
+          save();
+          render();
+        });
+
+        li.appendChild(delBtn);
+        habitList.appendChild(li);
+      }
+
+      /* [TODO 7] (3주차 조건문) 습관 개수 메시지
+         - 만약 habits.length 가 0보다 크면(>):
+             countBox.textContent = "총 " + habits.length + "개의 습관 💪";
+           아니면(else):
+             countBox.textContent = ""; */
+      if (habits.length > 0) {"총 " + habits.length + "개의 습관 💪";}
+      else {countBox.textContent="";}
+    }
+
+
+    /* ===== addHabit(): 습관 추가 ===== */
+    function addHabit() {
+      const text = habitInput.value;
+
+      /* [TODO 8] (4주차 폼검증/조건문) 빈 칸이면 추가 안 하기
+         - if (text === "") { return; } */
+      if (text === "") {return;}
+
+      /* [TODO 9] (3주차 배열 + 4주차 저장) 추가하고 저장하기
+         - habits.push(text);
+         - save();
+         - habitInput.value = "";
+         - render(); */
+      habits.push(text);
+      save();
+      habitInput.value = "";
+      render();
+
+    }
+
+
+    /* [TODO 10] (3주차 이벤트) '추가' 버튼에 addHabit 연결
+       - addBtn.addEventListener("click", addHabit); */
+    addBtn.addEventListener("click", addHabit);
+
+    /* 처음 한 번 그리기 */
+    render();
+  </script>
+
+</body>
+</html>

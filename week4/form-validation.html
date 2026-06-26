@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  4주차 연습 파일 (2) - 폼 검증 (Form Validation) ✅
+  ================================================================
+  목표: 사용자 입력값을 조건문으로 검사해서 안내 메시지 보여주기.
+  핵심: input 의 .value 를 if 로 검사 → 메시지/색 바꾸기.
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>폼 검증 연습</title>
+  <style>
+    body { font-family: sans-serif; max-width: 480px; margin: 30px auto; line-height: 1.7; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    label { display: block; margin-top: 16px; font-weight: bold; }
+    input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #94a3b8;
+            border-radius: 8px; box-sizing: border-box; margin-top: 4px; }
+    .msg { font-size: 14px; margin-top: 6px; min-height: 18px; }
+    .ok { color: #16a34a; }      /* 통과 = 초록 */
+    .error { color: #dc2626; }   /* 경고 = 빨강 */
+    button { margin-top: 20px; width: 100%; padding: 14px; font-size: 16px; border: none;
+             border-radius: 8px; background: #6366f1; color: white; cursor: pointer; }
+    #result { margin-top: 16px; font-size: 18px; text-align: center; min-height: 24px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>✅ 회원가입 폼 검증</h1>
+
+  <label for="username">아이디 (4자 이상)</label>
+  <input type="text" id="username" placeholder="아이디">
+  <div class="msg" id="usernameMsg"></div>
+
+  <label for="password">비밀번호 (6자 이상)</label>
+  <input type="password" id="password" placeholder="비밀번호">
+  <div class="msg" id="passwordMsg"></div>
+
+  <button id="submitBtn">가입하기</button>
+  <div id="result"></div>
+
+
+  <script>
+    const username = document.getElementById("username");
+    const usernameMsg = document.getElementById("usernameMsg");
+    const password = document.getElementById("password");
+    const passwordMsg = document.getElementById("passwordMsg");
+    const result = document.getElementById("result");
+
+
+    /* ===== (예시) 아이디 실시간 검증 =====
+       입력할 때마다 길이를 검사해서 메시지/색을 바꿔요.
+       - .value.length 로 글자 수를 알 수 있어요.
+       - className 으로 CSS 클래스(ok/error)를 바꿔 색을 정해요. */
+    username.addEventListener("input", function() {
+      if (username.value.length < 4) {
+        usernameMsg.textContent = "아이디는 4자 이상이어야 해요";
+        usernameMsg.className = "msg error";
+      } else {
+        usernameMsg.textContent = "사용 가능한 아이디예요 ✅";
+        usernameMsg.className = "msg ok";
+      }
+    });
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] 비밀번호 실시간 검증 (위 아이디 예시를 따라하기!)
+       - password.addEventListener("input", function() {
+           if (password.value.length < 6) {
+             passwordMsg.textContent = "비밀번호는 6자 이상이어야 해요";
+             passwordMsg.className = "msg error";
+           } else {
+             passwordMsg.textContent = "안전한 비밀번호예요 ✅";
+             passwordMsg.className = "msg ok";
+           }
+         }); */
+    password.addEventListener("input", function() {
+      if (password.value.length < 6){
+        passwordMsg.textContent = "비밀번호는 6자 이상이어야 해요";
+        passwordMsg.className = "msg error";
+      }
+      else {
+        passwordMsg.textContent = "안전한 비밀번호예요";
+        passwordMsg.className = "msg ok";
+      }
+    });
+
+
+    /* [TODO 2] 가입 버튼: 둘 다 통과해야 가입 성공
+       - submitBtn.addEventListener("click", function() {
+           if (username.value.length >= 4 && password.value.length >= 6) {
+             result.textContent = "🎉 가입 완료!";
+           } else {
+             result.textContent = "❌ 입력값을 다시 확인하세요";
+           }
+         });
+       (★ && = '그리고' (두 조건 다 참이어야 참) ★) */
+    submitBtn.addEventListener("click", function() {
+      if (username.value.length >= 4 && password.value.length >= 6){
+        result.textContent = "가입 완료";
+      }
+      else {
+        result.textContent = "입력값을 다시 확인하세요";
+      }
+    });
+
+  </script>
+
+</body>
+</html>

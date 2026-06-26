@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  4주차 연습 파일 (1) - 다양한 이벤트 🖱️⌨️
+  ================================================================
+  목표: click 말고도 input(실시간 입력), keydown(키 감지), mouseover 써보기.
+  핵심: event 객체로 "무슨 일이 일어났는지" 알 수 있다 (event.key 등).
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>다양한 이벤트</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #94a3b8;
+            border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; }
+    #preview { font-size: 22px; padding: 16px; background: #f1f5f9; border-radius: 8px;
+               min-height: 30px; margin-bottom: 24px; }
+    #hoverBox { padding: 30px; background: #e0e7ff; border-radius: 8px; text-align: center;
+                font-size: 18px; }
+    #log { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+           padding: 12px; min-height: 30px; white-space: pre-line; font-family: Consolas, monospace; margin-top: 12px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🖱️⌨️ 다양한 이벤트</h1>
+
+  <h3>① 실시간 미리보기 (input)</h3>
+  <input type="text" id="nameInput" placeholder="여기에 입력해보세요">
+  <div id="preview">미리보기가 여기 나와요</div>
+
+  <h3>② 마우스 올리기 (mouseover)</h3>
+  <div id="hoverBox">여기에 마우스를 올려보세요</div>
+
+  <div id="log"></div>
+
+
+  <script>
+    const nameInput = document.getElementById("nameInput");
+    const preview = document.getElementById("preview");
+    const hoverBox = document.getElementById("hoverBox");
+    const log = document.getElementById("log");
+
+    function print(text) {
+      log.textContent += text + "\n";
+    }
+
+
+    /* ===== (예시) input: 글자 칠 때마다 미리보기 갱신 ===== */
+    nameInput.addEventListener("input", function() {
+      preview.textContent = nameInput.value;   // 입력값을 실시간 표시
+    });
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] keydown: Enter 키를 누르면 로그 남기기
+       - nameInput.addEventListener("keydown", function(event) {
+           if (event.key === "Enter") {
+             print("⏎ 엔터로 제출: " + nameInput.value);
+           }
+         }); */
+    nameInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter"){
+        print("⏎ 엔터로 제출: " + nameInput.value);
+      }
+    });
+
+
+    /* [TODO 2] mouseover: hoverBox 에 마우스 올리면 배경색 + 글자 바꾸기
+       - hoverBox.addEventListener("mouseover", function() {
+           hoverBox.style.background = "#fde68a";
+           hoverBox.textContent = "마우스 감지! 🐭";
+         }); */
+    hoverBox.addEventListener("mouseover", function() {
+      hoverBox.style.background = "#fde68a";
+      hoverBox.textContent = "마우스 감지! 🐭";
+    })
+
+
+    /* [TODO 3] mouseout: 마우스가 떠나면 원래대로 되돌리기
+       (mouseover 의 반대 — 마우스가 빠져나갈 때 발생)
+       - hoverBox.addEventListener("mouseout", function() {
+           hoverBox.style.background = "#e0e7ff";
+           hoverBox.textContent = "여기에 마우스를 올려보세요";
+         }); */
+    hoverBox.addEventListener("mouseout", function() {
+      hoverBox.style.background = "#e0e7ff";
+      hoverBox.textContent = "여기에 마우스를 올려보세요";
+    })
+
+  </script>
+
+</body>
+</html>

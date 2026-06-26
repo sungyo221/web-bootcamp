@@ -1,0 +1,117 @@
+/* ================================================================
+   2주차 복습 테스트 - review.css 📝
+   ================================================================
+   배운 걸 스스로 떠올려서 채우세요! (힌트는 최소한만)
+   ★ 단위 px / 세미콜론 ; 잊지 말기 ★
+   ★ class 는 . / id 는 # ★
+
+   채우고 저장 → 브라우저에서 review.html 새로고침(F5)
+   ================================================================ */
+
+
+/* (이미 채움) 페이지 기본값 */
+body {
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+
+/* [복습 1] header 를 '메뉴바'로 만드세요.
+   목표: 로고는 왼쪽, 메뉴는 오른쪽 / 세로 가운데 정렬
+        안쪽 여백 16px / 배경색 #2c3e50 / 모서리 둥글게 10px
+   힌트: Flexbox 3종 + padding + background-color + border-radius */
+header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 16px;
+   background-color: #2c3e50;
+   border-radius: 10px;
+}
+
+
+/* [복습 2] .logo 글자: 흰색 / 크기 22px / 굵게 */
+.logo {
+   color: white;
+   font-size: 22px;
+   font-weight: bold;
+}
+
+
+/* [복습 3] nav ul: 메뉴를 가로로 나란히 / 간격 20px / 목록 점 없애기 / 기본 여백 0 */
+nav ul {
+   display: flex;
+   gap: 20px;
+   list-style: none;
+   padding: 0;
+}
+
+
+/* [복습 4] nav a: 글자 흰색 / 밑줄 없애기 */
+nav a {
+   color: white;
+   text-decoration: none;
+}
+
+
+/* [복습 5] section: 카드처럼
+   배경 #f8f9fa / 안쪽여백 20px / 위쪽 바깥여백 20px / 모서리 10px */
+section {
+   background-color: #f8f9fa;
+   padding: 20px;
+   margin-top: 20px;
+   border-radius: 10px;
+}
+
+
+/* [복습 6] h2: 글자색 #2c3e50 / 아래쪽 테두리 2px 실선 #3498db / 아래 안쪽여백 8px */
+h2 {
+   color: #2c3e50;
+   border-bottom: 2px solid #3498db;
+   padding-bottom: 8px;
+}
+
+
+/* [복습 7] 표: th, td 에 테두리 1px 실선 #dddddd + 안쪽여백 10px
+   그리고 th 만 배경 #3498db + 글자 흰색 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+   border: 1px solid #dddddd;
+   padding: 10px;
+}
+th {
+   background-color: #3498db;
+   color: white;
+}
+
+
+/* [복습 8] button: 배경 #2c3e50 / 글자 흰색 / 테두리 없음
+   안쪽여백 위아래10px 좌우24px / 모서리 6px / 손가락 커서 */
+button {
+   background-color: #2c3e50;
+   color: white;
+   border: none;
+   padding: 10px 24px;
+   border-radius: 6px;
+   cursor: pointer;
+}
+
+
+/* (이미 채움) 입력칸 & 라벨 & 푸터 */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #3498db;
+  border-radius: 6px;
+}
+label { display: block; margin-top: 12px; font-weight: bold; }
+footer { text-align: center; margin-top: 30px; color: #888888; font-size: 14px; }

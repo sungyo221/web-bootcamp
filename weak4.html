@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  4주차 정리 (치트시트) - summary.html 📑
+  ================================================================
+  4주차에 배운 JS 심화(이벤트·폼검증·localStorage)를 한 장에.
+  까먹으면 더블클릭해서 펼쳐보세요. (읽기용)
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>4주차 정리 - JS 심화</title>
+  <style>
+    body { font-family: sans-serif; max-width: 820px; margin: 0 auto; padding: 24px;
+           line-height: 1.7; color: #1e293b; background: #f8fafc; }
+    h1 { text-align: center; }
+    h2 { border-bottom: 3px solid #f7df1e; padding-bottom: 6px; margin-top: 40px; color: #323330; }
+    h3 { color: #0f172a; margin-bottom: 4px; }
+    .card { background: white; border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    code { background: #323330; color: #f7df1e; padding: 2px 6px; border-radius: 4px;
+           font-family: Consolas, monospace; }
+    pre { background: #1e293b; color: #e2e8f0; padding: 14px 16px; border-radius: 8px;
+          overflow-x: auto; font-size: 0.9em; }
+    pre code { background: none; color: inherit; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
+    th { background: #fef9c3; }
+    .tip { background: #fef9c3; border-left: 4px solid #eab308; padding: 10px 16px;
+           border-radius: 6px; margin: 12px 0; }
+    .warn { background: #fee2e2; border-left: 4px solid #ef4444; padding: 10px 16px;
+            border-radius: 6px; margin: 12px 0; }
+    .intro { text-align: center; color: #64748b; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📑 4주차 정리 — JavaScript 심화</h1>
+  <p class="intro">이벤트 · 폼 검증 · 데이터 저장으로 <b>진짜 앱</b>을 만드는 기술.</p>
+
+  <!-- ===== 1. 다양한 이벤트 ===== -->
+  <h2>1. 다양한 이벤트 🖱️⌨️</h2>
+  <div class="card">
+    <p>클릭 말고도 여러 이벤트가 있어요. 패턴은 같아요: <code>요소.addEventListener("이벤트", 함수)</code></p>
+    <table>
+      <tr><th>이벤트</th><th>언제 발생</th></tr>
+      <tr><td><code>"click"</code></td><td>클릭할 때</td></tr>
+      <tr><td><code>"input"</code></td><td>입력창에 글자 칠 때마다 (실시간!)</td></tr>
+      <tr><td><code>"keydown"</code></td><td>키보드 누를 때 (Enter 감지 등)</td></tr>
+      <tr><td><code>"mouseover"</code> / <code>"mouseout"</code></td><td>마우스 올릴 때 / 뗄 때</td></tr>
+    </table>
+    <h3>event 객체 — "무슨 일이 일어났나"</h3>
+<pre><code>input.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {     // 누른 키 확인
+    print("엔터!");
+  }
+});</code></pre>
+    <div class="tip">💡 <code>function(event)</code> 처럼 괄호 안에 <code>event</code>를 받으면, <code>event.key</code>로 어떤 키를 눌렀는지 알 수 있어요.</div>
+  </div>
+
+  <!-- ===== 2. 폼 검증 ===== -->
+  <h2>2. 폼 검증 (Form Validation) ✅</h2>
+  <div class="card">
+    <p>입력값을 <b>조건문으로 검사</b>해서 안내 메시지를 보여줘요. 패턴: <b>입력 → 검사(if) → 피드백</b></p>
+<pre><code>password.addEventListener("input", function() {
+  if (password.value.length < 6) {
+    msg.textContent = "6자 이상이어야 해요";
+    msg.className = "msg error";   // 빨강
+  } else {
+    msg.textContent = "안전해요 ✅";
+    msg.className = "msg ok";      // 초록
+  }
+});</code></pre>
+    <table>
+      <tr><th>코드</th><th>뜻</th></tr>
+      <tr><td><code>.value</code></td><td>입력창의 글자</td></tr>
+      <tr><td><code>.value.length</code></td><td>입력 글자 수</td></tr>
+      <tr><td><code>.className = "..."</code></td><td>CSS 클래스 교체 (색 제어)</td></tr>
+    </table>
+    <div class="tip">💡 <b><code>&&</code> = "그리고"</b> (둘 다 참이어야 참). <b><code>||</code> = "또는"</b> (하나만 참이어도 참).
+<pre><code>if (아이디.length >= 4 && 비번.length >= 6) {
+  result.textContent = "가입 완료!";   // 둘 다 통과해야!
+}</code></pre></div>
+  </div>
+
+  <!-- ===== 3. localStorage ===== -->
+  <h2>3. localStorage 💾 (데이터 저장)</h2>
+  <div class="card">
+    <p>데이터를 브라우저에 저장해서 <b>새로고침·재방문해도 유지</b>돼요.</p>
+    <table>
+      <tr><th>코드</th><th>뜻</th></tr>
+      <tr><td><code>localStorage.setItem("키", 값)</code></td><td>저장</td></tr>
+      <tr><td><code>localStorage.getItem("키")</code></td><td>불러오기 (없으면 <code>null</code>)</td></tr>
+      <tr><td><code>localStorage.removeItem("키")</code></td><td>삭제</td></tr>
+    </table>
+<pre><code>// 페이지 열릴 때: 저장된 값 확인
+const saved = localStorage.getItem("myName");
+if (saved) {
+  greeting.textContent = "다시 오셨네요, " + saved + "님!";
+}</code></pre>
+    <div class="warn">⚠️ localStorage는 <b>글자(문자열)만</b> 저장돼요! 배열·객체는 변환 필요:
+<pre><code>localStorage.setItem("todos", JSON.stringify(배열));  // 배열 → 글자 (저장)
+let 배열 = JSON.parse(localStorage.getItem("todos"));  // 글자 → 배열 (복원)</code></pre></div>
+  </div>
+
+  <!-- ===== 4. 앱 패턴 ===== -->
+  <h2>4. 🧩 데이터 저장 앱의 패턴</h2>
+  <div class="card">
+    <p>To-do 저장 앱에서 배운 핵심 흐름:</p>
+<pre><code>[페이지 열림]  getItem → JSON.parse → 배열 복원 → render()
+[추가/삭제]    배열 수정 → save() → render()
+
+function save() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}</code></pre>
+    <div class="tip">💡 <b>"배열이 바뀌면 무조건 save()."</b> 이 한 줄이 빠지면 새로고침 시 사라져요. 메모앱·가계부·쇼핑몰 전부 이 패턴이에요!</div>
+  </div>
+
+  <!-- ===== 체크리스트 ===== -->
+  <h2>✅ 체크리스트</h2>
+  <div class="card">
+    <ul>
+      <li>이벤트는 <code>요소.addEventListener("종류", 함수)</code> — click/input/keydown/mouseover</li>
+      <li>키 감지는 <code>function(event)</code> + <code>event.key === "Enter"</code></li>
+      <li>입력 글자 수는 <code>.value.length</code></li>
+      <li>"그리고"는 <code>&&</code>, "또는"은 <code>||</code></li>
+      <li>저장은 <code>setItem</code> / 불러오기 <code>getItem</code> / 삭제 <code>removeItem</code></li>
+      <li>배열 저장은 <code>JSON.stringify</code> ↔ <code>JSON.parse</code></li>
+      <li>요소는 <code>const x = document.getElementById("id")</code> 로 확실히 잡기</li>
+    </ul>
+  </div>
+
+  <p style="text-align:center; margin-top:40px; color:#64748b;">
+    ✅ 4주차 완료! 이벤트·폼검증·데이터 저장까지.<br>
+    다음은 <b>5주차 비동기/fetch</b> — 외부에서 진짜 데이터 가져오기 (날씨·영화 앱)! 🌐
+  </p>
+
+</body>
+</html>

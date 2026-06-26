@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웹개발 풀스택 12주 집중 로드맵 (취업 목표)</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --s1: #6366f1; /* 1단계 */
+    --s2: #0ea5e9; /* 2단계 */
+    --s3: #10b981; /* 3단계 */
+    --s4: #f59e0b; /* 4단계 */
+    --shadow: 0 4px 14px rgba(15,23,42,.06);
+  }
+  html[data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #334155;
+    --accent: #818cf8;
+    --accent-soft: #312e81;
+    --shadow: 0 4px 14px rgba(0,0,0,.4);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    transition: background .25s, color .25s;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 18px 80px; }
+
+  /* 헤더 */
+  header {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    border-radius: 18px;
+    padding: 30px 26px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.7rem; line-height: 1.3; }
+  header p.sub { margin: 0 0 16px; opacity: .92; font-size: .96rem; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+
+  /* 진행률 */
+  .progress-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-top: -28px;
+    margin-left: 16px;
+    margin-right: 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 2;
+  }
+  .progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .progress-top strong { font-size: 1.1rem; }
+  .progress-pct { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+  .bar { height: 14px; background: var(--border); border-radius: 999px; overflow: hidden; }
+  .bar > span {
+    display: block; height: 100%; width: 0%;
+    background: linear-gradient(90deg, #6366f1, #10b981);
+    border-radius: 999px;
+    transition: width .4s ease;
+  }
+  .progress-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    font-family: inherit; cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--card); color: var(--text);
+    padding: 7px 14px; border-radius: 10px; font-size: .85rem; font-weight: 600;
+    transition: background .15s, transform .05s;
+  }
+  button:hover { background: var(--accent-soft); }
+  button:active { transform: scale(.97); }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.primary:hover { filter: brightness(1.08); }
+
+  .warn {
+    margin: 22px 16px 0;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: .9rem;
+  }
+  html[data-theme="dark"] .warn { background: #431407; border-color: #7c2d12; color: #fdba74; }
+
+  /* 섹션 */
+  h2.section-title {
+    margin: 40px 0 6px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px;
+  }
+  .section-desc { color: var(--muted); margin: 0 0 18px; font-size: .92rem; }
+
+  /* 단계 */
+  .stage { margin-top: 34px; }
+  .stage-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: 12px; color: #fff; font-weight: 700;
+    box-shadow: var(--shadow);
+  }
+  .stage-head .num {
+    background: rgba(255,255,255,.25); width: 30px; height: 30px;
+    display: grid; place-items: center; border-radius: 50%; font-size: .95rem;
+  }
+  .stage-head .done-chip {
+    margin-left: auto; font-size: .78rem; font-weight: 600;
+    background: rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px;
+  }
+  .stage1 .stage-head { background: linear-gradient(135deg,#6366f1,#818cf8); }
+  .stage2 .stage-head { background: linear-gradient(135deg,#0ea5e9,#38bdf8); }
+  .stage3 .stage-head { background: linear-gradient(135deg,#10b981,#34d399); }
+  .stage4 .stage-head { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
+
+  /* 주차 카드 */
+  .week {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px; margin-top: 14px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--border);
+  }
+  .stage1 .week { border-left-color: var(--s1); }
+  .stage2 .week { border-left-color: var(--s2); }
+  .stage3 .week { border-left-color: var(--s3); }
+  .stage4 .week { border-left-color: var(--s4); }
+  .week h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .week .goal { color: var(--muted); font-size: .86rem; margin: 0 0 12px; }
+
+  ul.checks { list-style: none; margin: 0; padding: 0; }
+  ul.checks li { margin: 4px 0; }
+  ul.checks label {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: .94rem;
+    transition: background .12s;
+  }
+  ul.checks label:hover { background: var(--accent-soft); }
+  ul.checks input { margin-top: 4px; width: 17px; height: 17px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  ul.checks input:checked + span { text-decoration: line-through; color: var(--muted); }
+
+  .project {
+    margin-top: 12px; background: var(--accent-soft);
+    border-radius: 10px; padding: 10px 14px; font-size: .9rem;
+  }
+  .project b { color: var(--accent); }
+
+  /* 일반 카드 (루틴/리소스/취업) */
+  .panel {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 22px; box-shadow: var(--shadow); margin-top: 14px;
+  }
+  table.routine { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  table.routine th, table.routine td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); }
+  table.routine th { color: var(--muted); font-weight: 600; }
+  table.routine td:first-child { font-weight: 700; white-space: nowrap; color: var(--accent); }
+
+  .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 12px; }
+  .res {
+    border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px;
+    background: var(--bg);
+  }
+  .res a { color: var(--accent); text-decoration: none; font-weight: 700; }
+  .res a:hover { text-decoration: underline; }
+  .res small { color: var(--muted); display: block; margin-top: 4px; }
+  .res .tag { font-size: .72rem; background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+
+  .footer-note { text-align: center; color: var(--muted); font-size: .82rem; margin-top: 44px; }
+
+  /* 테마 토글 (떠있는 버튼) */
+  .theme-toggle {
+    position: fixed; right: 18px; bottom: 18px; z-index: 50;
+    width: 46px; height: 46px; border-radius: 50%; font-size: 1.2rem;
+    box-shadow: var(--shadow); display: grid; place-items: center; padding: 0;
+  }
+
+  @media (max-width: 560px) {
+    header h1 { font-size: 1.35rem; }
+    .progress-card { margin-left: 6px; margin-right: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>🚀 웹개발 풀스택 12주 집중 로드맵</h1>
+    <p class="sub">완전 초보 → 풀스택 개발자 취업까지 · 하루 4~6시간 몰입 기준</p>
+    <div class="badges">
+      <span class="badge">🌱 완전 초보</span>
+      <span class="badge">🧩 풀스택</span>
+      <span class="badge">⚡ 12주 집중</span>
+      <span class="badge">💼 취업 목표</span>
+    </div>
+  </header>
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <strong>📊 전체 진행률</strong>
+      <span class="progress-pct" id="pct">0%</span>
+    </div>
+    <div class="bar"><span id="barFill"></span></div>
+    <div class="progress-actions">
+      <span id="countText" style="font-size:.85rem;color:var(--muted);align-self:center;">완료 0 / 0 항목</span>
+      <button class="primary" onclick="checkAllVisible()" style="margin-left:auto;">이번 주 보기 위로 ↑</button>
+      <button onclick="resetAll()">전체 초기화</button>
+    </div>
+  </div>
+
+  <div class="warn">
+    ⚠️ <b>현실적인 안내:</b> 3개월(12주) 안에 취업 수준에 도달하는 건 <b>매우 도전적인 목표</b>예요.
+    핵심은 <b>하루 몰입 시간</b>과 <b>꾸준함</b>입니다. 진도가 늦어져도 괜찮으니 이 로드맵을
+    내 속도에 맞춰 조정하세요. 완벽보다 <b>완성과 반복</b>이 중요합니다.
+  </div>
+
+  <!-- ============ 로드맵 ============ -->
+  <h2 class="section-title">🗺️ 12주 학습 로드맵</h2>
+  <p class="section-desc">매주 학습 항목을 체크하면 위쪽 진행률이 자동으로 올라가고, 브라우저에 저장돼요.</p>
+
+  <!-- 1단계 -->
+  <div class="stage stage1">
+    <div class="stage-head">
+      <span class="num">1</span>
+      <span>1단계 · 웹의 기초 & 프론트엔드 입문 (1~3주)</span>
+      <span class="done-chip" data-stage="1">0/0</span>
+    </div>
+
+    <div class="week">
+      <h3>1주차 — 웹 동작 원리 & HTML</h3>
+      <p class="goal">목표: 웹이 어떻게 동작하는지 이해하고, HTML로 문서 구조를 만든다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>인터넷/웹 동작 원리 (클라이언트·서버, HTTP, 브라우저)</span></label></li>
+        <li><label><input type="checkbox"><span>HTML 기본 구조와 자주 쓰는 태그</span></label></li>
+        <li><label><input type="checkbox"><span>시맨틱 태그 (header, nav, main, section, article, footer)</span></label></li>
+        <li><label><input type="checkbox"><span>링크, 이미지, 목록, 표</span></label></li>
+        <li><label><input type="checkbox"><span>폼(form), input 종류, 버튼</span></label></li>
+        <li><label><input type="checkbox"><span>VS Code 설치 & 기본 사용법</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> HTML만으로 "자기소개 페이지" 만들기</div>
+    </div>
+
+    <div class="week">
+      <h3>2주차 — CSS & 반응형</h3>
+      <p class="goal">목표: CSS로 디자인하고, 어떤 화면에서도 보기 좋게 만든다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>CSS 적용 방법, 선택자, 색/폰트/여백</span></label></li>
+        <li><label><input type="checkbox"><span>박스 모델 (margin, border, padding, content)</span></label></li>
+        <li><label><input type="checkbox"><span>Flexbox 레이아웃</span></label></li>
+        <li><label><input type="checkbox"><span>Grid 레이아웃</span></label></li>
+        <li><label><input type="checkbox"><span>반응형(미디어 쿼리), 모바일 우선</span></label></li>
+        <li><label><input type="checkbox"><span>position, z-index, 간단한 애니메이션/transition</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> 반응형 "랜딩 페이지"(소개 사이트) 만들기</div>
+    </div>
+
+    <div class="week">
+      <h3>3주차 — JavaScript 기초</h3>
+      <p class="goal">목표: 프로그래밍의 기본 문법과 사고방식을 익힌다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>변수(let/const), 자료형, 연산자</span></label></li>
+        <li><label><input type="checkbox"><span>조건문(if/switch), 반복문(for/while)</span></label></li>
+        <li><label><input type="checkbox"><span>함수, 매개변수, 반환값, 스코프</span></label></li>
+        <li><label><input type="checkbox"><span>배열과 객체, 기본 메서드</span></label></li>
+        <li><label><input type="checkbox"><span>console & 디버깅 기초</span></label></li>
+        <li><label><input type="checkbox"><span>작은 알고리즘 문제 5~10개 풀어보기</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> 계산기 또는 가위바위보 게임(콘솔/간단 UI)</div>
+    </div>
+  </div>
+
+  <!-- 2단계 -->
+  <div class="stage stage2">
+    <div class="stage-head">
+      <span class="num">2</span>
+      <span>2단계 · JavaScript 심화 & 동적 웹 (4~6주)</span>
+      <span class="done-chip" data-stage="2">0/0</span>
+    </div>
+
+    <div class="week">
+      <h3>4주차 — DOM & 이벤트</h3>
+      <p class="goal">목표: JavaScript로 화면을 직접 조작하고 사용자와 상호작용한다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>DOM 선택/생성/수정/삭제</span></label></li>
+        <li><label><input type="checkbox"><span>이벤트(click, input, submit 등) 처리</span></label></li>
+        <li><label><input type="checkbox"><span>클래스 토글로 동적 UI 만들기</span></label></li>
+        <li><label><input type="checkbox"><span>폼 입력값 다루기 & 유효성 검증</span></label></li>
+        <li><label><input type="checkbox"><span>localStorage로 데이터 저장</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> To-do 리스트 앱 (추가/삭제/완료/저장)</div>
+    </div>
+
+    <div class="week">
+      <h3>5주차 — ES6+ & 비동기/API</h3>
+      <p class="goal">목표: 현대 JS 문법과 외부 데이터(API)를 다룬다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>화살표 함수, 구조분해, 스프레드, 템플릿 리터럴</span></label></li>
+        <li><label><input type="checkbox"><span>배열 고차함수(map, filter, reduce, forEach)</span></label></li>
+        <li><label><input type="checkbox"><span>비동기 개념, Promise, async/await</span></label></li>
+        <li><label><input type="checkbox"><span>fetch로 REST API 호출 & JSON 다루기</span></label></li>
+        <li><label><input type="checkbox"><span>에러 처리(try/catch)</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> 공개 API로 날씨 앱 / 영화 검색 앱</div>
+    </div>
+
+    <div class="week">
+      <h3>6주차 — Git, 협업도구 & 배포</h3>
+      <p class="goal">목표: 실무 필수 도구를 익히고 내 결과물을 인터넷에 올린다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Git 기본(add, commit, branch, merge)</span></label></li>
+        <li><label><input type="checkbox"><span>GitHub 저장소 만들기 & push</span></label></li>
+        <li><label><input type="checkbox"><span>README 작성법</span></label></li>
+        <li><label><input type="checkbox"><span>브라우저 개발자 도구 활용</span></label></li>
+        <li><label><input type="checkbox"><span>GitHub Pages / Netlify로 배포</span></label></li>
+        <li><label><input type="checkbox"><span>지금까지 만든 프로젝트 전부 GitHub에 올리기</span></label></li>
+      </ul>
+      <div class="project">📌 <b>목표:</b> 배포된 프로젝트 링크 2~3개 확보 (포트폴리오 시작!)</div>
+    </div>
+  </div>
+
+  <!-- 3단계 -->
+  <div class="stage stage3">
+    <div class="stage-head">
+      <span class="num">3</span>
+      <span>3단계 · 프레임워크 & 백엔드 입문 (7~9주)</span>
+      <span class="done-chip" data-stage="3">0/0</span>
+    </div>
+
+    <div class="week">
+      <h3>7주차 — React 기초</h3>
+      <p class="goal">목표: 컴포넌트 기반 프론트엔드 개발을 시작한다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>React/Vite 프로젝트 세팅, JSX</span></label></li>
+        <li><label><input type="checkbox"><span>컴포넌트와 props</span></label></li>
+        <li><label><input type="checkbox"><span>state와 useState</span></label></li>
+        <li><label><input type="checkbox"><span>이벤트 처리 & 조건부 렌더링</span></label></li>
+        <li><label><input type="checkbox"><span>리스트 렌더링(map)과 key</span></label></li>
+        <li><label><input type="checkbox"><span>useEffect 기초</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> React로 To-do 앱 다시 만들기</div>
+    </div>
+
+    <div class="week">
+      <h3>8주차 — React 심화 & SPA</h3>
+      <p class="goal">목표: 여러 페이지와 API를 다루는 실제 앱 구조를 만든다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>React Router(페이지 이동)</span></label></li>
+        <li><label><input type="checkbox"><span>API 연동(fetch/axios)과 로딩·에러 상태</span></label></li>
+        <li><label><input type="checkbox"><span>상태 관리(Context API 등)</span></label></li>
+        <li><label><input type="checkbox"><span>컴포넌트 분리 & 재사용</span></label></li>
+        <li><label><input type="checkbox"><span>커스텀 훅 맛보기</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> API 기반 SPA(영화/상품 목록 + 상세 페이지)</div>
+    </div>
+
+    <div class="week">
+      <h3>9주차 — Node.js, Express & DB</h3>
+      <p class="goal">목표: 직접 서버와 API, 데이터베이스를 만든다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Node.js & npm 이해</span></label></li>
+        <li><label><input type="checkbox"><span>Express로 REST API 만들기(GET/POST/PUT/DELETE)</span></label></li>
+        <li><label><input type="checkbox"><span>라우팅, 미들웨어, CORS</span></label></li>
+        <li><label><input type="checkbox"><span>데이터베이스 선택 & 기초(MongoDB 또는 PostgreSQL)</span></label></li>
+        <li><label><input type="checkbox"><span>CRUD를 DB와 연결</span></label></li>
+        <li><label><input type="checkbox"><span>환경변수(.env), 에러 처리</span></label></li>
+      </ul>
+      <div class="project">📌 <b>미니 프로젝트:</b> React 프론트 + Express API + DB 연동(메모/게시판)</div>
+    </div>
+  </div>
+
+  <!-- 4단계 -->
+  <div class="stage stage4">
+    <div class="stage-head">
+      <span class="num">4</span>
+      <span>4단계 · 풀스택 통합 & 취업 준비 (10~12주)</span>
+      <span class="done-chip" data-stage="4">0/0</span>
+    </div>
+
+    <div class="week">
+      <h3>10~11주차 — 풀스택 포트폴리오 프로젝트</h3>
+      <p class="goal">목표: 취업용 "대표 프로젝트" 1개를 제대로 완성한다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>아이디어 정하기 & 기능 명세 작성</span></label></li>
+        <li><label><input type="checkbox"><span>회원가입/로그인(인증, JWT 등)</span></label></li>
+        <li><label><input type="checkbox"><span>핵심 CRUD 기능 구현(프론트+백+DB)</span></label></li>
+        <li><label><input type="checkbox"><span>반응형 UI & 사용성 다듬기</span></label></li>
+        <li><label><input type="checkbox"><span>배포(프론트: Netlify/Vercel, 백: Render/Railway 등)</span></label></li>
+        <li><label><input type="checkbox"><span>README에 기능·기술스택·스크린샷 정리</span></label></li>
+      </ul>
+      <div class="project">📌 <b>산출물:</b> 실제 접속 가능한 풀스택 앱 + 잘 정리된 GitHub</div>
+    </div>
+
+    <div class="week">
+      <h3>12주차 — 취업 준비 마무리</h3>
+      <p class="goal">목표: 이력서·포트폴리오·면접 기초를 갖추고 지원을 시작한다.</p>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>이력서 작성(경력/프로젝트/기술 키워드)</span></label></li>
+        <li><label><input type="checkbox"><span>포트폴리오 페이지/문서 정리</span></label></li>
+        <li><label><input type="checkbox"><span>CS 기초(HTTP, REST, 브라우저 렌더링, 자료구조 맛보기)</span></label></li>
+        <li><label><input type="checkbox"><span>JavaScript/React 단골 면접 질문 정리</span></label></li>
+        <li><label><input type="checkbox"><span>코딩테스트 입문(프로그래머스 Lv.1~2)</span></label></li>
+        <li><label><input type="checkbox"><span>채용공고 분석 & 지원 시작 ✍️</span></label></li>
+      </ul>
+      <div class="project">🎯 <b>최종 목표:</b> 배포된 풀스택 앱 + GitHub 포트폴리오 + 이력서 + 지원 시작</div>
+    </div>
+  </div>
+
+  <!-- ============ 일일 루틴 ============ -->
+  <h2 class="section-title">⏱️ 하루 루틴 가이드 (4~6시간 예시)</h2>
+  <p class="section-desc">"이론만" 보지 말고 반드시 손으로 코드를 쳐보세요. 인풋:아웃풋 = 3:7 권장.</p>
+  <div class="panel">
+    <table class="routine">
+      <tr><th>시간</th><th>활동</th><th>설명</th></tr>
+      <tr><td>60~90분</td><td>개념 학습</td><td>강의/문서로 새 개념 익히기 (인풋)</td></tr>
+      <tr><td>90~120분</td><td>손코딩 실습</td><td>배운 걸 직접 따라 치고 변형해보기</td></tr>
+      <tr><td>60~90분</td><td>프로젝트 적용</td><td>그날 배운 걸 미니 프로젝트에 녹이기 (가장 중요)</td></tr>
+      <tr><td>20~30분</td><td>복습 & 기록</td><td>오늘 배운 것 메모/블로그/커밋, 내일 할 일 정하기</td></tr>
+    </table>
+  </div>
+
+  <!-- ============ 추천 리소스 ============ -->
+  <h2 class="section-title">📚 추천 학습 리소스 (무료 위주)</h2>
+  <p class="section-desc">한국어 자료로 시작하고, 익숙해지면 영어 공식 문서(MDN)를 함께 보세요.</p>
+  <div class="panel">
+    <div class="res-grid">
+      <div class="res"><span class="tag">한국어</span><br><a href="https://www.opentutorials.org/course/3083" target="_blank">생활코딩</a><small>HTML/CSS/JS 입문, 초보자에게 친절</small></div>
+      <div class="res"><span class="tag">한국어 · 유튜브</span><br><a href="https://www.youtube.com/@nomadcoders" target="_blank">노마드코더</a><small>실전 프로젝트형 강의, 풀스택 다수</small></div>
+      <div class="res"><span class="tag">한국어 · 유튜브</span><br><a href="https://www.youtube.com/@dream-coding" target="_blank">드림코딩</a><small>JavaScript/프론트엔드 개념 정리</small></div>
+      <div class="res"><span class="tag">한국어 · 문서</span><br><a href="https://ko.javascript.info/" target="_blank">모던 JavaScript 튜토리얼</a><small>JS를 깊이 있게, 무료 한글 번역</small></div>
+      <div class="res"><span class="tag">영어 · 실습</span><br><a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a><small>따라하며 배우는 무료 커리큘럼</small></div>
+      <div class="res"><span class="tag">영어 · 로드맵</span><br><a href="https://www.theodinproject.com/" target="_blank">The Odin Project</a><small>풀스택 무료 커리큘럼(체계적)</small></div>
+      <div class="res"><span class="tag">공식 문서</span><br><a href="https://developer.mozilla.org/ko/" target="_blank">MDN Web Docs</a><small>웹 표준 공식 레퍼런스(한글 일부)</small></div>
+      <div class="res"><span class="tag">React 공식</span><br><a href="https://ko.react.dev/" target="_blank">React 공식 문서(한국어)</a><small>React 학습의 기준</small></div>
+      <div class="res"><span class="tag">로드맵</span><br><a href="https://roadmap.sh/" target="_blank">roadmap.sh</a><small>프론트/백엔드 전체 지도</small></div>
+      <div class="res"><span class="tag">코딩테스트</span><br><a href="https://programmers.co.kr/" target="_blank">프로그래머스</a><small>취업용 코테 연습(한국어)</small></div>
+    </div>
+  </div>
+
+  <!-- ============ 취업 체크리스트 ============ -->
+  <h2 class="section-title">💼 취업 준비 체크리스트</h2>
+  <p class="section-desc">기술 공부와 함께 병행하세요. 특히 GitHub 커밋 습관은 일찍 시작할수록 좋아요.</p>
+  <div class="panel">
+    <ul class="checks">
+      <li><label><input type="checkbox"><span>매일/매주 GitHub 커밋 습관 (잔디 심기)</span></label></li>
+      <li><label><input type="checkbox"><span>완성·배포된 포트폴리오 프로젝트 2~3개</span></label></li>
+      <li><label><input type="checkbox"><span>대표 프로젝트는 풀스택 + 인증 + DB 포함</span></label></li>
+      <li><label><input type="checkbox"><span>각 프로젝트 README(기능·기술·실행법·스크린샷)</span></label></li>
+      <li><label><input type="checkbox"><span>이력서: 기술스택 키워드 명확히 (HTML/CSS/JS/React/Node 등)</span></label></li>
+      <li><label><input type="checkbox"><span>기술 면접 단골 질문 답변 준비</span></label></li>
+      <li><label><input type="checkbox"><span>코딩테스트 Lv.1~2 꾸준히 연습</span></label></li>
+      <li><label><input type="checkbox"><span>학습 과정 블로그/노션 기록(성실함 어필)</span></label></li>
+      <li><label><input type="checkbox"><span>채용 공고 10개 분석 후 맞춤 지원 시작</span></label></li>
+    </ul>
+  </div>
+
+  <p class="footer-note">
+    체크 상태는 이 브라우저에 자동 저장됩니다. · 내 속도에 맞게 조정하며 끝까지 완주해요! 💪
+  </p>
+
+</div>
+
+<button class="theme-toggle" onclick="toggleTheme()" title="다크/라이트 모드" id="themeBtn">🌙</button>
+
+<script>
+  var STORE_KEY = 'webdev-plan-progress-v1';
+  var THEME_KEY = 'webdev-plan-theme';
+
+  // 모든 체크박스에 고유 id 부여 (순서 기반)
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  boxes.forEach(function(box, i){ box.dataset.key = 'c' + i; });
+
+  function save() {
+    var state = {};
+    boxes.forEach(function(b){ if (b.checked) state[b.dataset.key] = 1; });
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){}
+  }
+
+  function load() {
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch(e){}
+    boxes.forEach(function(b){ b.checked = !!state[b.dataset.key]; });
+  }
+
+  function updateProgress() {
+    var total = boxes.length;
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    var pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('barFill').style.width = pct + '%';
+    document.getElementById('countText').textContent = '완료 ' + done + ' / ' + total + ' 항목';
+
+    // 단계별 카운트
+    document.querySelectorAll('.stage').forEach(function(stage){
+      var chip = stage.querySelector('.done-chip');
+      if (!chip) return;
+      var sboxes = stage.querySelectorAll('input[type=checkbox]');
+      var sdone = 0;
+      sboxes.forEach(function(b){ if (b.checked) sdone++; });
+      chip.textContent = sdone + '/' + sboxes.length;
+    });
+  }
+
+  document.addEventListener('change', function(e){
+    if (e.target && e.target.type === 'checkbox') {
+      save();
+      updateProgress();
+    }
+  });
+
+  function resetAll() {
+    if (!confirm('정말 모든 체크를 초기화할까요?')) return;
+    boxes.forEach(function(b){ b.checked = false; });
+    save();
+    updateProgress();
+  }
+
+  function checkAllVisible() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 테마
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('themeBtn').textContent = (t === 'dark') ? '☀️' : '🌙';
+  }
+  function toggleTheme() {
+    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+  }
+
+  // 초기화
+  (function init(){
+    var savedTheme = 'light';
+    try { savedTheme = localStorage.getItem(THEME_KEY) || 'light'; } catch(e){}
+    applyTheme(savedTheme);
+    load();
+    updateProgress();
+  })();
+</script>
+</body>
+</html>

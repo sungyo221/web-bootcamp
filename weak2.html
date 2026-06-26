@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 정리 (치트시트) - summary.html 📑
+  ================================================================
+  2주차에 배운 CSS 개념을 한 장에 모았어요.
+  까먹으면 더블클릭해서 펼쳐보세요. (읽기용 - 채울 TODO 없음)
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>2주차 정리 - CSS</title>
+  <style>
+    body { font-family: sans-serif; max-width: 820px; margin: 0 auto; padding: 24px;
+           line-height: 1.7; color: #1e293b; background: #f8fafc; }
+    h1 { text-align: center; }
+    h2 { border-bottom: 3px solid #6366f1; padding-bottom: 6px; margin-top: 40px; color: #4338ca; }
+    h3 { color: #0f172a; margin-bottom: 4px; }
+    .card { background: white; border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    code { background: #eef2ff; color: #4338ca; padding: 2px 6px; border-radius: 4px;
+           font-family: Consolas, monospace; }
+    pre { background: #1e293b; color: #e2e8f0; padding: 14px 16px; border-radius: 8px;
+          overflow-x: auto; font-size: 0.9em; }
+    pre code { background: none; color: inherit; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
+    th { background: #eef2ff; }
+    .tip { background: #fef9c3; border-left: 4px solid #eab308; padding: 10px 16px;
+           border-radius: 6px; margin: 12px 0; }
+    .warn { background: #fee2e2; border-left: 4px solid #ef4444; padding: 10px 16px;
+            border-radius: 6px; margin: 12px 0; }
+    .intro { text-align: center; color: #64748b; }
+    /* 박스 모델 시각화용 */
+    .bm { background:#e0e7ff; border:3px solid #6366f1; padding:24px; border-radius:8px; text-align:center; }
+    .bm-wrap { background:#fde68a; padding:24px; border-radius:8px; text-align:center; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📑 2주차 정리 — CSS</h1>
+  <p class="intro">웹 페이지를 <b>꾸미는(디자인)</b> CSS. 2주차에 배운 모든 것을 모았어요.</p>
+
+  <!-- ===== 0. CSS란 ===== -->
+  <h2>0. CSS는 무엇?</h2>
+  <div class="card">
+    <p><b>HTML = 뼈대, CSS = 옷·화장.</b> 같은 HTML도 CSS에 따라 완전히 달라 보여요.</p>
+    <h3>기본 문법 (딱 이 모양!)</h3>
+<pre><code>선택자 {
+  속성: 값;     /* ← 끝에 세미콜론 ; 꼭! */
+}
+
+/* 예시 */
+h1 {
+  color: blue;
+  font-size: 30px;   /* ← 숫자엔 단위 px 꼭! */
+}</code></pre>
+    <p>"<b>어떤 걸</b>(선택자) → <b>뭐를</b>(속성) → <b>어떻게</b>(값)" 바꿀지 정하는 거예요.</p>
+  </div>
+
+  <!-- ===== 1. CSS 넣는 법 ===== -->
+  <h2>1. CSS를 HTML에 넣는 3가지 방법</h2>
+  <div class="card">
+    <table>
+      <tr><th>방법</th><th>형태</th><th>비고</th></tr>
+      <tr><td>인라인</td><td><code>&lt;h1 style="color:red"&gt;</code></td><td>지저분, 비추천</td></tr>
+      <tr><td>내부</td><td><code>&lt;style&gt;...&lt;/style&gt;</code> (head 안)</td><td>연습용</td></tr>
+      <tr><td><b>외부</b></td><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td><td><b>실무 정석!</b></td></tr>
+    </table>
+    <div class="tip">💡 <b>외부 CSS</b>: 구조(HTML)와 디자인(CSS)을 <b>다른 파일로 분리</b>. <code>&lt;head&gt;</code> 안에 <code>&lt;link&gt;</code> 한 줄로 연결해요. (우리가 cafe.html ↔ cafe.css 로 해본 방식!)</div>
+  </div>
+
+  <!-- ===== 2. 선택자 ===== -->
+  <h2>2. 선택자 3종 (제일 중요!)</h2>
+  <div class="card">
+    <table>
+      <tr><th>선택자</th><th>고르는 대상</th><th>예시</th></tr>
+      <tr><td><b>태그</b></td><td>그 태그 전부</td><td><code>p { }</code> → 모든 <code>&lt;p&gt;</code></td></tr>
+      <tr><td><b>class</b> (점 <code>.</code>)</td><td><code>class="..."</code> 붙은 것</td><td><code>.box { }</code> → <code>class="box"</code></td></tr>
+      <tr><td><b>id</b> (샵 <code>#</code>)</td><td><code>id="..."</code> 붙은 것(1개)</td><td><code>#title { }</code> → <code>id="title"</code></td></tr>
+    </table>
+    <p>여러 개 한꺼번에: <code>th, td { }</code> (쉼표로 묶기) · 자식만: <code>nav a { }</code> (nav 안의 a)</p>
+    <div class="warn">⚠️ <b>class는 점 <code>.</code>, id는 샵 <code>#</code></b>. CSS에서 붙이는 걸 잊지 마세요! (HTML 태그엔 <code>class="..."</code>, <code>id="..."</code> 그대로)</div>
+  </div>
+
+  <!-- ===== 3. 자주 쓰는 속성 ===== -->
+  <h2>3. 자주 쓰는 속성</h2>
+  <div class="card">
+    <table>
+      <tr><th>속성</th><th>뜻</th><th>예시</th></tr>
+      <tr><td><code>color</code></td><td>글자색</td><td><code>color: white;</code></td></tr>
+      <tr><td><code>background-color</code></td><td>배경색</td><td><code>background-color: #6366f1;</code></td></tr>
+      <tr><td><code>font-size</code></td><td>글자 크기</td><td><code>font-size: 22px;</code></td></tr>
+      <tr><td><code>font-weight</code></td><td>글자 굵기</td><td><code>font-weight: bold;</code></td></tr>
+      <tr><td><code>text-align</code></td><td>가로 정렬</td><td><code>text-align: center;</code></td></tr>
+      <tr><td><code>text-decoration</code></td><td>밑줄 등</td><td><code>text-decoration: none;</code> (링크 밑줄 제거)</td></tr>
+      <tr><td><code>list-style</code></td><td>목록 점</td><td><code>list-style: none;</code> (점 제거)</td></tr>
+      <tr><td><code>border-radius</code></td><td>모서리 둥글게</td><td><code>border-radius: 10px;</code></td></tr>
+      <tr><td><code>cursor</code></td><td>마우스 모양</td><td><code>cursor: pointer;</code> (손가락)</td></tr>
+    </table>
+    <div class="warn">⚠️ <b>색 표기</b>: <code>red</code>, <code>white</code> 같은 이름 또는 <code>#6366f1</code> 같은 6자리 코드(#RRGGBB).</div>
+  </div>
+
+  <!-- ===== 4. 박스 모델 ===== -->
+  <h2>4. 박스 모델 📦 (가장 핵심!)</h2>
+  <div class="card">
+    <p>모든 요소는 <b>네모 상자</b>. 4겹으로 되어 있어요.</p>
+    <div class="bm-wrap">
+      margin (바깥 여백 = 노란 영역)
+      <div class="bm">
+        border (테두리) + padding (안쪽 여백 = 파란 영역)<br>
+        <b>↑ 내용(content)</b>
+      </div>
+    </div>
+    <table>
+      <tr><th>층</th><th>뜻</th><th>특징</th></tr>
+      <tr><td><code>content</code></td><td>실제 내용</td><td>글·이미지</td></tr>
+      <tr><td><code>padding</code></td><td><b>안쪽</b> 여백 (내용~테두리)</td><td>배경색이 <b>칠해짐</b></td></tr>
+      <tr><td><code>border</code></td><td>테두리 선</td><td><code>border: 2px solid #333;</code> (두께 종류 색)</td></tr>
+      <tr><td><code>margin</code></td><td><b>바깥</b> 여백 (다른 상자와 거리)</td><td>투명 (안 칠해짐)</td></tr>
+    </table>
+    <div class="tip">💡 <b>방향별:</b> <code>padding: 10px 20px;</code> (위아래 10 / 좌우 20) · <code>margin-top: 16px;</code> (위만)</div>
+    <div class="warn">⚠️ <b>padding vs margin</b> — padding은 상자 <b>안쪽</b>(배경색 칠해짐), margin은 상자 <b>바깥</b>(투명, 다른 요소 밀어냄).</div>
+  </div>
+
+  <!-- ===== 5. Flexbox ===== -->
+  <h2>5. Flexbox ↔️ (가로 배치의 왕)</h2>
+  <div class="card">
+    <p>요소를 <b>가로로 나란히</b> 배치하고 정렬. 실무에서 제일 많이 써요.</p>
+<pre><code>.container {
+  display: flex;     /* ← 이 한 줄이면 자식들이 가로로! */
+}</code></pre>
+    <table>
+      <tr><th>속성</th><th>역할</th><th>자주 쓰는 값</th></tr>
+      <tr><td><code>display: flex</code></td><td>가로 배치 시작</td><td>(★flexbox 아님! flex★)</td></tr>
+      <tr><td><code>justify-content</code></td><td><b>가로</b> 정렬</td><td><code>center</code> / <code>space-between</code></td></tr>
+      <tr><td><code>align-items</code></td><td><b>세로</b> 정렬</td><td><code>center</code></td></tr>
+      <tr><td><code>gap</code></td><td>자식 사이 간격</td><td><code>gap: 16px;</code></td></tr>
+    </table>
+    <div class="tip">💡 <b>메뉴바 공식</b>: <code>display:flex</code> + <code>justify-content: space-between</code>(로고 왼쪽·메뉴 오른쪽) + <code>align-items: center</code>(세로 가운데).</div>
+    <div class="warn">⚠️ <b>가장 흔한 실수!</b> <code>display: flexbox;</code> ❌ → <b><code>display: flex;</code></b> ✅ ("Flexbox"는 기술 이름, CSS 값은 <code>flex</code>)</div>
+  </div>
+
+  <!-- ===== 6. 색 대비 ===== -->
+  <h2>6. 색 대비 (디자인 기본기)</h2>
+  <div class="card">
+    <p style="background:#2c3e50; color:white; padding:12px; border-radius:6px;">
+      ✅ 어두운 배경 + 흰 글자 → 잘 보임</p>
+    <p style="background:aqua; color:white; padding:12px; border-radius:6px;">
+      ❌ 밝은 배경 + 흰 글자 → 흐릿해서 잘 안 보임</p>
+    <div class="tip">💡 <b>규칙:</b> 흰 글자 → 어두운 배경 / 어두운 글자 → 밝은 배경. 글자와 배경은 항상 <b>밝기 차이</b>를 크게!</div>
+  </div>
+
+  <!-- ===== 7. 작업 흐름 ===== -->
+  <h2>🔁 작업 흐름 & 체크리스트</h2>
+  <div class="card">
+    <p><b>흐름:</b> CSS 수정 → 저장 <code>Ctrl+S</code> → 브라우저 새로고침 <code>F5</code> (한 줄씩 바꾸며 눈으로 확인!)</p>
+    <h3>실수 방지 체크리스트 ✅</h3>
+    <ul>
+      <li>숫자엔 <b>단위 <code>px</code></b> — <code>16</code> ❌ / <code>16px</code> ✅</li>
+      <li>줄 끝엔 <b>세미콜론 <code>;</code></b></li>
+      <li>class는 <code>.</code>, id는 <code>#</code></li>
+      <li>가로 배치는 <code>display: <b>flex</b>;</code> (flexbox ❌)</li>
+      <li>흰 글자엔 <b>어두운 배경</b> (안 그러면 안 보임)</li>
+    </ul>
+  </div>
+
+  <p style="text-align:center; margin-top:40px; color:#64748b;">
+    ✅ 2주차 완료! HTML(뼈대) + CSS(디자인) 끝.<br>
+    다음은 <b>3주차 JavaScript</b> — 클릭하면 반응하는 <b>살아있는 웹</b>! 🧠
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  4주차 연습 파일 (3) - localStorage 💾
+  ================================================================
+  목표: 데이터를 브라우저에 저장해서 새로고침/재방문해도 유지하기.
+  핵심: setItem(저장) / getItem(불러오기) / removeItem(삭제)
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+  ★ 테스트: 입력 후 F5(새로고침) 해도 값이 남아있는지 확인! ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>localStorage 연습</title>
+  <style>
+    body { font-family: sans-serif; max-width: 480px; margin: 30px auto; line-height: 1.7; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    input { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #94a3b8;
+            border-radius: 8px; box-sizing: border-box; margin: 8px 0; }
+    button { padding: 12px 20px; font-size: 16px; border: none; border-radius: 8px;
+             background: #6366f1; color: white; cursor: pointer; margin: 4px; }
+    #clearBtn { background: #ef4444; }
+    #greeting { font-size: 20px; padding: 16px; background: #f1f5f9; border-radius: 8px;
+                margin-top: 16px; text-align: center; min-height: 28px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>💾 localStorage</h1>
+  <p>이름을 저장하면 <b>새로고침(F5)해도</b> 기억해요!</p>
+
+  <input type="text" id="nameInput" placeholder="이름을 입력하세요">
+  <button id="saveBtn">저장</button>
+  <button id="clearBtn">삭제</button>
+
+  <div id="greeting"></div>
+
+
+  <script>
+    const nameInput = document.getElementById("nameInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const greeting = document.getElementById("greeting");
+
+
+    /* ===== (예시) 페이지 열릴 때: 저장된 이름이 있으면 인사 =====
+       getItem 은 저장된 값을 꺼내요. 없으면 null(빈 값)을 줘요. */
+    const savedName = localStorage.getItem("myName");
+    if (savedName) {
+      greeting.textContent = "다시 오셨네요, " + savedName + "님! 👋";
+    } else {
+      greeting.textContent = "처음 오셨군요! 이름을 저장해보세요.";
+    }
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] '저장' 버튼: 입력한 이름을 localStorage 에 저장
+       - saveBtn.addEventListener("click", function() {
+           localStorage.setItem("myName", nameInput.value);   // 저장!
+           greeting.textContent = "저장 완료! " + nameInput.value + "님 🎉";
+         });
+       (저장 후 F5 새로고침 → 위 예시가 "다시 오셨네요"로 바뀌면 성공!) */
+    saveBtn.addEventListener("click", function() {
+      localStorage.setItem("myName", nameInput.value);
+      greeting.textContent = "저장완료! " + nameInput.value + "님";
+    });
+
+
+    /* [TODO 2] '삭제' 버튼: 저장된 이름 지우기
+       - clearBtn.addEventListener("click", function() {
+           localStorage.removeItem("myName");   // 삭제!
+           greeting.textContent = "삭제됐어요. 안녕히 가세요 👋";
+         });
+       (삭제 후 F5 → "처음 오셨군요"로 돌아오면 성공!) */
+    clearBtn.addEventListener("click", function() {
+      localStorage.removeItem("myName");
+      greeting.textContent = "삭제됐어요. 안녕히 가세요";
+    });
+
+  </script>
+
+</body>
+</html>

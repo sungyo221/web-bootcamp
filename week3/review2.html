@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 복습 테스트 (2회차) - 장바구니 🛒
+  ================================================================
+  변수·조건·반복·함수·배열·DOM 을 스스로 떠올려 짜기!
+  ★ 이번 집중 복습: 문자열은 "따옴표" / 배열은 [대괄호] / print는 + 로 연결 ★
+
+  <script> 안의 [TODO]를 채우세요.
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3주차 복습 2회차</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; text-align: center; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #output { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+              padding: 16px; min-height: 40px; white-space: pre-line; font-family: Consolas, monospace; text-align: left; }
+    button { font-size: 16px; padding: 12px 24px; margin: 10px; border: none;
+             border-radius: 8px; background: #6366f1; color: white; cursor: pointer; }
+    .hint { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🛒 장바구니 복습</h1>
+  <p class="hint">결과 ↓ (복습 5는 버튼 클릭)</p>
+  <div id="output"></div>
+  <button id="payBtn">결제하기</button>
+
+  <script>
+    function print(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+    document.getElementById("output").textContent = "";
+
+
+    /* ================= 복습 시작! ================= */
+
+    /* [복습 1] 변수 (문자열 vs 숫자 구분!)
+       - const 가게이름 에 가게 이름(문자열, 따옴표!) 담기
+       - let 포인트 에 숫자 1000 담기
+       - print 로 "가게: ___, 포인트: ___" 한 줄로 출력 (★+ 로 연결!★) */
+    const 가게이름 = "교촌치킨 !"
+    let 포인트 = 1000;
+    print("가게: " + 가게이름 + ", 포인트: " + 포인트);
+
+
+    /* [복습 2] 배열 (대괄호!)
+       - let 장바구니 = ["커피", "샌드위치", "쿠키"];  만들고
+       - print("첫 상품: " + 장바구니[0]);     // 커피
+       - print("상품 수: " + 장바구니.length); */
+    let 장바구니 = ["커피", "샌드위치", "쿠키"];
+    print("첫 상품: " + 장바구니[0]);
+    print("상품 수: " + 장바구니.length);
+
+
+    /* [복습 3] 배열 + 반복문
+       - for 반복으로 장바구니 상품을 하나씩 출력
+         (형태: "1. 커피" 처럼 — 힌트: (i+1) 을 쓰면 1번부터!) */
+    for (let i = 0; i < 장바구니.length; i++){
+      print(장바구니[i]);
+    }
+
+
+    /* [복습 4] 함수 + return + 조건문 (배송비 계산기)
+       - function 배송비(금액) 를 만들고:
+           금액이 30000 이상이면 0 을 return (무료), 아니면 3000 을 return
+       - print("20000원 주문 배송비: " + 배송비(20000));   // 3000
+       - print("50000원 주문 배송비: " + 배송비(50000));   // 0 */
+    function 배송비(금액){
+      if (금액 >= 30000) {return 0;}
+      else {return 3000;}
+    }
+    print("20000원 주문 배송비: " + 배송비(20000));
+    print("50000원 주문 배송비: " + 배송비(50000));
+
+
+    /* [복습 5] DOM + 이벤트
+       - id 가 "payBtn" 인 버튼을 잡아서
+       - 클릭하면 print("결제 완료! 🎉") 가 실행되게 연결 */
+    const btn = document.getElementById("payBtn");
+    btn.addEventListener("click", function() {
+      print("결제 완료! 🎉");
+    });
+
+  </script>
+
+</body>
+</html>

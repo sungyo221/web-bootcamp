@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  5주차 복습 2회차 - 오늘의 조언 💬
+  ================================================================
+  fetch · async/await · try/catch 스스로 짜기!
+  무료 API: https://api.adviceslip.com/advice
+  → { "slip": { "id": 1, "advice": "조언 내용..." } }
+  ★ 주의: advice 가 'slip 안에' 들어있어요! → data.slip.advice (한 단계 더!) ★
+
+  <script> 안의 [TODO]를 채우세요. 인터넷 연결 필요!
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>5주차 복습 - 조언</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 30px auto; line-height: 1.7; text-align: center; padding: 0 16px; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    button { font-size: 16px; padding: 12px 24px; border: none; border-radius: 8px;
+             background: #6366f1; color: white; cursor: pointer; }
+    #advice { font-size: 20px; margin-top: 24px; min-height: 30px; color: #4338ca; padding: 16px;
+              background: #f1f5f9; border-radius: 8px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>💬 오늘의 조언</h1>
+  <button id="adviceBtn">조언 받기</button>
+  <div id="advice">버튼을 눌러보세요</div>
+
+
+  <script>
+    const adviceBtn = document.getElementById("adviceBtn");
+    const adviceBox = document.getElementById("advice");
+
+
+    /* [복습 1] async 함수 getAdvice 를 만드세요 (function 앞에 async!)
+       이름은 정확히 getAdvice (대소문자 주의!) */
+    async function getAdvice() {
+      adviceBox.textContent = "불러오는 중...";
+
+      /* [복습 2] try { 시작 */
+      try {
+
+        /* [복습 3] fetch 3줄 공식
+           - const response = await fetch("https://api.adviceslip.com/advice");
+           - const data = await response.json(); */
+        const response = await fetch("https://api.adviceslip.com/advice");
+        const data = await response.json();
+
+
+        /* [복습 4] 화면에 조언 표시 (★ data.slip.advice — slip 안에 있음! ★)
+           - adviceBox.textContent = data.slip.advice; */
+        adviceBox.textContent = data.slip.advice;
+
+
+      /* [복습 5] } catch (error) { ... } 로 마무리
+         - adviceBox.textContent = "오류! 인터넷을 확인하세요 ⚠️"; */
+      } catch (error) {adviceBox.textContent = "오류! 인터넷을 확인하세요 ⚠️";}
+    }
+
+
+    /* [복습 6] adviceBtn 클릭 시 getAdvice 실행 (★이름 철자·대소문자 똑같이!★) */
+    adviceBtn.addEventListener("click", getAdvice);
+
+  </script>
+
+</body>
+</html>

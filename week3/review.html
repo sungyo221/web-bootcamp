@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 복습 테스트 - JavaScript 종합 📝
+  ================================================================
+  변수·조건문·반복문·함수·배열·DOM/이벤트 를 스스로 떠올려 짜기!
+  힌트는 '할 일'만. 코드는 직접!
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3주차 복습 테스트</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; text-align: center; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #output { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+              padding: 16px; min-height: 40px; white-space: pre-line; font-family: Consolas, monospace; text-align: left; }
+    button { font-size: 16px; padding: 12px 24px; margin: 10px; border: none;
+             border-radius: 8px; background: #6366f1; color: white; cursor: pointer; }
+    .hint { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📝 3주차 복습 테스트</h1>
+  <p class="hint">결과 ↓ (TODO 5는 버튼을 눌러야 작동)</p>
+  <div id="output"></div>
+  <button id="runBtn">결과 다시 계산</button>
+
+  <script>
+    function print(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+    document.getElementById("output").textContent = "";
+
+
+    /* ================= 복습 시작! ================= */
+
+    /* [복습 1] 변수
+       - const 로 myName 에 본인 이름(문자열) 담기
+       - let 로 myAge 에 나이(숫자) 담기
+       - print 로 "이름: ___, 나이: ___" 형태로 출력 */
+    const myName = "정선교";
+    let myAge = 26;
+    print("이름: " + myName[0], "나이: " + myAge);
+
+
+    /* [복습 2] 함수 + return + 조건문 (합격 판정기)
+       - function 판정(점수) 를 만들고:
+           점수가 60 이상이면 "합격" 을 return, 아니면 "불합격" 을 return
+       - print("70점: " + 판정(70));   // 합격
+       - print("50점: " + 판정(50));   // 불합격 */
+    function 판정(점수){
+      if (점수 >= 60) {return "합격";}
+      else {return "불합격";}
+    }
+    print("70점: " + 판정(70));
+    print("50점: " + 판정(50));
+
+
+    /* [복습 3] 배열 + 반복문
+       - let 점수목록 = [90, 75, 100, 60];  만들고
+       - for 반복문으로 점수목록을 하나씩 print
+         (형태: "점수: 90" 처럼) */
+    let 점수목록 = [90, 75, 100, 60];
+    for (let i = 0; i < 점수목록.length; i++){
+      print("점수: " + 점수목록[i]);
+    }
+
+
+    /* [복습 4] 배열 + 반복 + 누적 (평균 구하기)
+       - 위 점수목록의 합을 구해서(let 합 = 0; 반복마다 더하기)
+       - 평균을 print  (합 / 점수목록.length) */
+    let sum = 0;
+    for (let i = 0; i < 점수목록.length; i++){
+      sum += 점수목록[i];
+    }
+    print(sum/점수목록.length);
+
+
+    /* [복습 5] DOM + 이벤트
+       - id 가 "runBtn" 인 버튼을 잡아서
+       - 클릭하면 print("버튼 클릭됨! 🎉") 가 실행되게 addEventListener 연결
+       힌트: const btn = document.getElementById("runBtn");
+             btn.addEventListener("click", function() { ... }); */
+    const btn = document.getElementById("runBtn");
+    btn.addEventListener("click", function() {
+      print("버튼 클릭됨! 🎉");
+    });
+
+  </script>
+
+</body>
+</html>

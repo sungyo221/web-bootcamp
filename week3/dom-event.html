@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 연습 파일 (5) - DOM & 이벤트 🖱️ (진짜 인터랙티브!)
+  ================================================================
+  목표: 버튼을 클릭하면 화면이 바뀌게 만들기.
+  핵심: 1) document.getElementById 로 요소 잡기
+        2) .textContent / .style 로 바꾸기
+        3) addEventListener("click", 함수) 로 클릭에 반응
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+  ★ 이번엔 결과 박스가 아니라 '진짜 화면'이 바뀌어요! ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM & 이벤트 연습</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; text-align: center; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #message { font-size: 24px; padding: 30px; margin: 20px 0; background: #f1f5f9;
+               border-radius: 12px; border: 2px solid #94a3b8; }
+    button { font-size: 16px; padding: 12px 24px; margin: 6px; border: none;
+             border-radius: 8px; background: #6366f1; color: white; cursor: pointer; }
+    button:hover { background: #4f46e5; }
+    #counter { font-size: 48px; font-weight: bold; color: #6366f1; margin: 20px 0; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🖱️ DOM & 이벤트</h1>
+
+  <!-- 바꿀 대상들 (HTML) -->
+  <div id="message">여기 글자가 바뀔 거예요</div>
+
+  <!-- 버튼들 -->
+  <button id="btn-hello">인사하기</button>
+  <button id="btn-color">색 바꾸기</button>
+
+  <hr style="margin: 30px 0;">
+
+  <h2>클릭 카운터</h2>
+  <div id="counter">0</div>
+  <button id="btn-plus">+1 누르기</button>
+
+
+  <script>
+
+    /* ===== (예시) 버튼 클릭하면 글자 바꾸기 =====
+       1) getElementById 로 요소 2개를 잡고
+       2) addEventListener 로 "클릭되면 실행할 함수"를 연결  */
+    const messageBox = document.getElementById("message");
+    const helloBtn = document.getElementById("btn-hello");
+
+    helloBtn.addEventListener("click", function() {
+      messageBox.textContent = "안녕하세요! 👋 클릭 성공!";
+    });
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] '색 바꾸기' 버튼을 누르면 messageBox 배경색이 바뀌게
+       - const colorBtn = document.getElementById("btn-color");
+       - colorBtn.addEventListener("click", function() {
+           messageBox.style.background = "#fde68a";   // 노란색으로
+           messageBox.textContent = "색이 바뀌었어요! 🎨";
+         }); */
+    const colorBtn = document.getElementById("btn-color");
+    colorBtn.addEventListener("click", function(){
+      messageBox.style.background = "#fde68a";
+      messageBox.textContent = "색이 바뀌었어요! 🎨";
+    });
+
+
+    /* [TODO 2] 클릭 카운터 만들기 (★변수 누적 + 이벤트 조합★)
+       - let count = 0;                                    // 카운트 상자
+       - const counterBox = document.getElementById("counter");
+       - const plusBtn = document.getElementById("btn-plus");
+       - plusBtn.addEventListener("click", function() {
+           count = count + 1;                  // 누를 때마다 1 증가
+           counterBox.textContent = count;     // 화면 숫자 갱신
+         });
+       (버튼을 여러 번 눌러서 숫자가 올라가는지 확인!) */
+    let count = 0;
+    const counterBox = document.getElementById("counter");
+    const plusBtn = document.getElementById("btn-plus");
+    plusBtn.addEventListener("click", function() {
+      count = count + 1;
+      counterBox.textContent = count;
+    });
+
+  </script>
+
+</body>
+</html>

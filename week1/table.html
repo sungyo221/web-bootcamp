@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  ============================================
+  1주차 연습 파일 (3) - 표(Table)
+  ============================================
+  목표: table / tr / th / td 로 표를 만든다.
+  핵심: 가로줄(tr)을 위에서 아래로 쌓는다. 각 줄 안에 칸(th 또는 td)을 넣는다.
+
+  사용법: [TODO]를 채우고 저장(Ctrl+S) → 브라우저 새로고침(F5).
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>표 연습</title>
+  <style>
+    /* 칸 경계가 보이도록 임시 스타일 (2주차에 배워요) */
+    table { border-collapse: collapse; margin: 10px 0; }
+    th, td { border: 1px solid #6366f1; padding: 8px 16px; }
+    th { background: #eef2ff; }
+  </style>
+</head>
+
+<body>
+
+  <h1>나의 주간 공부 시간표</h1>
+
+  <table>
+    <!-- 1번째 줄: 제목 칸(th)들 -->
+    <tr>
+      <th>요일</th>
+      <th>공부 내용</th>
+      <th>시간</th>
+    </tr>
+
+    <!-- 2번째 줄: 데이터 칸(td)들 -->
+    <tr>
+      <td>월요일</td>
+      <td>HTML 기초</td>
+      <td>2시간</td>
+    </tr>
+
+    <!-- [TODO 1] 위 <tr>...</tr> 한 덩어리를 따라서,
+         "화요일 / CSS 기초 / 2시간" 줄을 하나 더 추가해보세요. -->
+    <tr>
+      <td>화요일</td>
+      <td>CSS 기초</td>
+      <td>2시간</td>
+    </tr>
+
+
+    <!-- [TODO 2] 한 줄 더! "수요일 / JavaScript / 3시간" 을 추가해보세요. -->
+    <tr>
+      <td>수요일</td>
+      <td>JavaScript</td>
+      <td>3시간</td>
+    </tr>
+
+
+  </table>
+
+  <!-- [TODO 3] 도전: 위 표를 다 만든 뒤,
+       th(제목 칸)와 td(데이터 칸)가 화면에서 어떻게 다르게 보이는지 관찰해보세요.
+       (th는 글자가 굵고 가운데 정렬돼요!) -->
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  1주차 미니 프로젝트 - 나만의 자기소개 페이지 🎉
+  ================================================================
+  지금까지 배운 모든 것을 합치는 최종 결과물이에요!
+  새로운 건 없어요. 전부 해본 것들의 조합입니다.
+
+  사용법:
+  1. 더블클릭해서 브라우저로 열기.
+  2. 아래 [TODO]를 하나씩 채우고 저장(Ctrl+S) → 새로고침(F5).
+  3. 내용은 '진짜 본인 정보'로 자유롭게 바꿔도 좋아요!
+
+  쓰는 도구 정리(전부 배운 것):
+  - 시맨틱:  header / nav / main / section / footer
+  - 기본:    h1~h2 / p / img / a
+  - 목록/표: ul·li / table·tr·th·td
+  - 폼:      form / label / input / textarea / button
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>정선교 - 자기소개</title>
+  <style>
+    /* 보기 좋으라고 넣은 임시 스타일. 2주차(CSS)에서 직접 다룰 거예요. 지금은 신경 X */
+    body { font-family: sans-serif; max-width: 720px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #1e293b; }
+    header { text-align: center; padding: 20px; background: #eef2ff; border-radius: 12px; }
+    nav ul { list-style: none; padding: 0; display: flex; gap: 16px; justify-content: center; }
+    nav a { text-decoration: none; color: #6366f1; font-weight: bold; }
+    section { margin: 28px 0; }
+    h2 { border-bottom: 2px solid #6366f1; padding-bottom: 6px; }
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 16px; text-align: left; }
+    th { background: #f1f5f9; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 14px; padding: 10px 20px; cursor: pointer; background: #6366f1; color: white; border: none; border-radius: 6px; }
+    footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 0.9em; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== 1. 머리말 (header + nav) ========== -->
+  <header>
+    <!-- [TODO 1] h1으로 본인 이름을 큰 제목으로 넣으세요. 예: 정선교 -->
+    <h1>정선교</h1>
+
+    <!-- [TODO 2] p로 한 줄 소개를 넣으세요. 예: 웹개발자를 꿈꾸는 초보 개발자입니다. -->
+    <p>저는 웹개발자를 꿈꾸는 초보 개발자입니다.</p>
+
+    <nav>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#skills">배우는 것</a></li>
+        <li><a href="#schedule">시간표</a></li>
+        <li><a href="#contact">연락하기</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- ========== 2. 본문 (main) ========== -->
+  <main>
+
+    <!-- ---- 소개 구역 ---- -->
+    <section id="about">
+      <h2>소개</h2>
+      <!-- [TODO 3] img로 사진을 하나 넣어보세요.
+           연습용 랜덤 이미지 주소: https://picsum.photos/300/200
+           형태: <img src="주소" alt="설명" width="300"> -->
+      <img src="https://picsum.photos/300/200" alt="증명사진" width="300">
+
+      <!-- [TODO 4] p로 자기소개를 2~3문장 자유롭게 적어보세요. -->
+       <p>저는 게임개발자로 시작해서 웹개발자를 꿈꾸고 있는 프로그래머입니다.
+        게임 개발에서 익힌 논리적 사고와 문제 해결 방식을 웹 개발에도 적극 활용하며, 더 많은 사람들에게 도움이 되는 서비스를 만드는 웹 개발자로 성장하겠습니다. 
+       </p>
+
+
+    </section>
+
+    <!-- ---- 배우는 것 구역 (목록) ---- -->
+    <section id="skills">
+      <h2>요즘 배우는 것</h2>
+      <!-- [TODO 5] ul + li 로 배우는 기술 3개를 목록으로 넣으세요. 예: HTML, CSS, JavaScript -->
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+
+    </section>
+
+    <!-- ---- 시간표 구역 (표) ---- -->
+    <section id="schedule">
+      <h2>나의 공부 시간표</h2>
+      <!-- [TODO 6] table 로 시간표를 만드세요.
+           - 제목 줄(th): 요일 / 내용
+           - 데이터 줄(td): 최소 2줄 (예: 월요일/HTML, 화요일/CSS) -->
+      <table>
+        <tr>
+          <th>요일</th>
+          <th>내용</th>
+        </tr>
+        <tr>
+          <td>월요일</td>
+          <td>HTML</td>
+        </tr>
+        <tr>
+          <td>화요일</td>
+          <td>CSS</td>
+        </tr>
+      </table>
+
+    </section>
+
+    <!-- ---- 연락 구역 (폼) ---- -->
+    <section id="contact">
+      <h2>연락하기</h2>
+      <form>
+        <!-- [TODO 7] 폼을 완성하세요:
+             - label "이름" + input type="text" (id="c-name")
+             - label "이메일" + input type="email" (id="c-email")
+             - label "메시지" + textarea (id="c-msg")
+             - 마지막에 <button type="submit">보내기</button> -->
+        <label for="c-name">이름</label>
+        <input type="text" id="c-name" placeholder="이름을 입력해주세요">
+        <label for="c-email">이메일</label>
+        <input type="email" id="c-email" placeholder="이메일을 입력해주세요">
+        <label for="c-msg">메세지</label>
+        <textarea id="c-msg"></textarea>
+        <button type="submit">보내기</button>
+
+      </form>
+    </section>
+
+  </main>
+
+
+  <!-- ========== 3. 꼬리말 (footer) ========== -->
+  <!-- [TODO 8] footer를 만들고 안에 p로 저작권 문구를 넣으세요. 예: © 2026 정선교 -->
+  <footer>
+    <p>© 2026 정선교</p>
+  </footer>
+
+</body>
+</html>

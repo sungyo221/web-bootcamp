@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  5주차 복습 3회차 - 랜덤 상식 🧠
+  ================================================================
+  fetch 전체 흐름을 스스로! 힌트 최소.
+  무료 API: https://uselessfacts.jsph.pl/api/v2/facts/random
+  → { "id": "...", "text": "상식 내용...", ... }  (text 안에 내용!)
+
+  ★ 체크: ① async ② try/catch 로 fetch 감싸기 ③ data.text ④ 버튼 연결은 괄호 없이! ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>5주차 복습 - 상식</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 30px auto; line-height: 1.7; text-align: center; padding: 0 16px; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    button { font-size: 16px; padding: 12px 24px; border: none; border-radius: 8px;
+             background: #6366f1; color: white; cursor: pointer; }
+    #fact { font-size: 18px; margin-top: 24px; min-height: 30px; padding: 16px;
+            background: #f1f5f9; border-radius: 8px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🧠 랜덤 상식</h1>
+  <button id="factBtn">상식 보기</button>
+  <div id="fact">버튼을 눌러보세요</div>
+
+
+  <script>
+    const factBtn = document.getElementById("factBtn");
+    const factBox = document.getElementById("fact");
+
+
+    /* [복습] getFact 라는 async 함수를 직접 만들고, 그 안에서:
+       1) factBox.textContent = "불러오는 중...";
+       2) try { 안에서:
+            - fetch 로 "https://uselessfacts.jsph.pl/api/v2/facts/random" 요청
+            - .json() 으로 변환
+            - factBox.textContent = data.text;   (text 안에 상식이 있어요!)
+          } catch (error) {
+            - factBox.textContent = "오류! ⚠️";
+          }
+       그리고 함수 밖에서:
+       3) factBtn 클릭 시 getFact 실행 (★괄호 없이 getFact★)
+
+       ↓↓↓ 여기에 직접 작성하세요 ↓↓↓ */
+    async function getFact() {
+      try {
+        const response = await fetch("https://uselessfacts.jsph.pl/api/v2/facts/random");
+        const data = await response.json();
+
+        factBox.textContent = data.text;
+      } catch (error){
+        factBox.textContent = "오류! ⚠️";
+      }
+    }
+    factBtn.addEventListener("click", getFact);
+
+  </script>
+
+</body>
+</html>

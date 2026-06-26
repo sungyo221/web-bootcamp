@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 미니 프로젝트 - 카페 페이지 꾸미기 🎨 (cafe.html)
+  ================================================================
+  1주차에 만든 '카페 소개' 뼈대를, 2주차에 배운 CSS로 예쁘게!
+
+  ★ 이 HTML 파일은 '구조'만 담당해요. 손대지 않아도 돼요. ★
+  ★ 디자인은 옆의 'cafe.css' 파일에서 채웁니다! ★
+
+  주목: <head> 아래에 <link>로 cafe.css 를 연결했어요 (외부 CSS).
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>카페 보네르 - 도심 속 휴식</title>
+
+  <!-- ★외부 CSS 연결★ 이 한 줄이 cafe.css 를 불러와요 -->
+  <link rel="stylesheet" href="cafe.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">☕ 카페 보네르</div>
+    <nav>
+      <ul>
+        <li><a href="#menu">메뉴</a></li>
+        <li><a href="#location">위치</a></li>
+        <li><a href="#review">후기</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="menu">
+      <h2>대표 메뉴</h2>
+      <table>
+        <tr><th>메뉴</th><th>가격</th></tr>
+        <tr><td>아메리카노</td><td>4,500원</td></tr>
+        <tr><td>카페라떼</td><td>5,000원</td></tr>
+        <tr><td>바닐라라떼</td><td>5,500원</td></tr>
+      </table>
+    </section>
+
+    <section id="location">
+      <h2>찾아오는 길</h2>
+      <ul>
+        <li>지하철 2호선 강남역 2번 출구</li>
+        <li>도보 5분 거리</li>
+        <li>주차 가능 (2시간 무료)</li>
+      </ul>
+    </section>
+
+    <section id="review">
+      <h2>후기 남기기</h2>
+      <form>
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="이름을 입력하세요">
+        <label for="review-text">후기</label>
+        <textarea id="review-text" placeholder="후기를 남겨주세요"></textarea>
+        <button type="submit">남기기</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 카페 보네르 · 정선교</p>
+  </footer>
+
+</body>
+</html>

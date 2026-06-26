@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 미니 프로젝트 - To-do 리스트 앱 🚀
+  ================================================================
+  배운 것 총동원: 배열 + 이벤트 + DOM + 함수
+
+  동작: 입력창에 할 일 쓰고 '추가' 누르면 → 목록에 나타남.
+        목록의 '삭제' 누르면 → 그 항목이 사라짐.
+
+  ★ <script> 안의 [TODO]를 채우세요. 어려운 부분(그리기)은 만들어 뒀어요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>To-do 리스트</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 30px auto; line-height: 1.6; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; text-align: center; }
+    .input-row { display: flex; gap: 8px; margin-bottom: 20px; }
+    #todoInput { flex: 1; padding: 12px; font-size: 16px; border: 2px solid #94a3b8; border-radius: 8px; }
+    #addBtn { padding: 12px 20px; font-size: 16px; border: none; border-radius: 8px;
+              background: #6366f1; color: white; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; align-items: center;
+         background: #f1f5f9; padding: 12px 16px; margin: 8px 0; border-radius: 8px; }
+    li button { border: none; background: #ef4444; color: white; padding: 6px 12px;
+                border-radius: 6px; cursor: pointer; }
+    .empty { color: #94a3b8; text-align: center; padding: 20px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📝 나의 할 일</h1>
+
+  <div class="input-row">
+    <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+    <button id="addBtn">추가</button>
+  </div>
+
+  <ul id="todoList"></ul>
+
+
+  <script>
+    /* 1) 할 일들을 담을 배열 (처음엔 비어 있음) */
+    let todos = [];
+
+    /* 2) 자주 쓸 요소들 미리 잡아두기 */
+    const input = document.getElementById("todoInput");
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("todoList");
+
+
+    /* ===== render(): 배열을 보고 화면 목록을 다시 그리는 함수 =====
+       (이 부분은 어려우니 만들어 뒀어요. 읽어만 보세요!)
+       - 배열을 반복하며 <li>를 만들고, 각 항목에 삭제 버튼을 붙여요. */
+    function render() {
+      list.innerHTML = "";   // 기존 목록 싹 지우고 새로 그림
+
+      if (todos.length === 0) {
+        list.innerHTML = "<p class='empty'>할 일이 없어요 🎉</p>";
+        return;
+      }
+
+      for (let i = 0; i < todos.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = todos[i];
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "삭제";
+        delBtn.addEventListener("click", function() {
+          todos.splice(i, 1);   // 배열에서 i번째 항목 제거
+          render();             // 다시 그리기
+        });
+
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      }
+    }
+
+
+    /* ===== addTodo(): 입력값을 배열에 추가하는 함수 ===== */
+    function addTodo() {
+      const text = input.value;        // 입력창의 글자 가져오기
+
+      /* [TODO 1] 빈 칸이면 추가하지 않기 (방어 코드)
+         - if (text === "") { return; }   // 비었으면 함수 끝 */
+      if (text === "") {return;}
+
+      /* [TODO 2] 배열에 추가하기
+         - todos.push(text);   // 입력값을 배열 맨 뒤에 추가 */
+      todos.push(text);
+
+      /* [TODO 3] 입력창 비우기 + 화면 다시 그리기
+         - input.value = "";   // 입력창 초기화
+         - render();           // 목록 새로 그리기 */
+      input.value = "";
+      render();
+    }
+
+
+    /* [TODO 4] '추가' 버튼을 누르면 addTodo 실행되게 연결
+       - addBtn.addEventListener("click", addTodo); */
+    addBtn.addEventListener("click", addTodo);
+
+    /* 처음 한 번 그려주기 (빈 목록 메시지 표시) */
+    render();
+  </script>
+
+</body>
+</html>

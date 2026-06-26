@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 연습 파일 (4) - 함수 function 📦
+  ================================================================
+  목표: 함수를 만들고(정의) 부르기(호출). 매개변수, return 이해.
+  구조: function 이름(매개변수) { 할 일; return 결과; }
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>함수 연습</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #output { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+              padding: 16px; min-height: 40px; white-space: pre-line; font-family: Consolas, monospace; }
+    .hint { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📦 함수 function</h1>
+  <p class="hint">결과 ↓</p>
+  <div id="output"></div>
+
+
+  <script>
+    function print(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+    document.getElementById("output").textContent = "";
+
+
+    /* ===== (예시) 입력을 받아 인사하는 함수 =====
+       1) function 으로 '정의'(만들기)
+       2) 이름() 으로 '호출'(부르기) — 부를 때마다 실행됨  */
+    function 인사(이름) {
+      print(이름 + "님, 환영합니다!");
+    }
+    인사("관리자");        // 호출 1
+    인사("정선교");        // 호출 2
+    print("--- 예시 끝 ---");
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] 간단한 함수 만들고 부르기 
+       - function 응원() { print("할 수 있어요! 💪"); }  로 정의하고
+       - 응원();  을 3번 호출해서 3번 출력되게 하기 */
+    function 응원(){
+      print("할 수 있어요! 💪");
+    }
+    응원();
+    응원();
+    응원();
+
+    /* [TODO 2] 매개변수 1개 받는 함수
+       - function 소개(나이) { print("저는 " + 나이 + "살입니다"); }
+       - 소개(26);  소개(30);  처럼 다른 값으로 2번 호출 */
+    function 소개(나이){
+      print("저는 " + 나이 + "살입니다");
+    }
+    소개(26);
+    소개(30);
+
+    /* [TODO 3] return 으로 결과 돌려주기 (★중요★)
+       - function 더하기(a, b) { return a + b; }   로 정의하고
+       - let 합 = 더하기(7, 5);   로 결과를 받아서
+       - print("7 + 5 = " + 합);   로 출력  (12 나옴) */
+    function 더하기(a,b){
+      return a + b;
+    }
+    let 합 = 더하기(7,5);
+    print("7 + 5 = " + 합);
+
+    /* [TODO 4] 도전! return + if 가 든 함수 (합격 판정기)
+       - function 판정(점수) {
+           if (점수 >= 60) {
+             return "합격";
+           } else {
+             return "불합격";
+           }
+         }
+       - print("80점: " + 판정(80));    (합격)
+       - print("40점: " + 판정(40));    (불합격) */
+    function 판정(점수){
+      if (점수 >= 60){return "합격";}
+      else {return "불합격";}
+    }
+    print("80점: " + 판정(80));
+    print("40점: " + 판정(40));
+
+  </script>
+
+</body>
+</html>

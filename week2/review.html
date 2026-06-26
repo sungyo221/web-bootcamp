@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 복습 테스트 - 독서 모임 페이지 📚 (review.html)
+  ================================================================
+  구조(HTML)는 완성! 디자인은 review.css 에서 직접!
+  <link>로 review.css 연결돼 있어요.
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>책벗 - 독서 모임</title>
+  <link rel="stylesheet" href="review.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">📚 책벗</div>
+    <nav>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#schedule">일정</a></li>
+        <li><a href="#join">신청</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <h2>모임 소개</h2>
+      <p>한 달에 한 권, 함께 읽고 이야기 나누는 독서 모임입니다.</p>
+    </section>
+
+    <section id="schedule">
+      <h2>모임 일정</h2>
+      <table>
+        <tr><th>회차</th><th>날짜</th><th>책</th></tr>
+        <tr><td>1회</td><td>7월 5일</td><td>데미안</td></tr>
+        <tr><td>2회</td><td>8월 2일</td><td>1984</td></tr>
+      </table>
+    </section>
+
+    <section id="join">
+      <h2>참가 신청</h2>
+      <form>
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="이름">
+        <label for="msg">한마디</label>
+        <textarea id="msg" placeholder="각오 한마디!"></textarea>
+        <button type="submit">신청하기</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 책벗 · 정선교</p>
+  </footer>
+
+</body>
+</html>

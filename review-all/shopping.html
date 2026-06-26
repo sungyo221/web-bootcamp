@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  종합 복습 4회차 (1~4주차) - 장보기 리스트 🛒
+  ================================================================
+  지난번 틀린 3가지를 콕 집어 연습!
+  ① for 는 let i = 0 부터   ② push(text) 괄호 안에 값!   ③ 입력창(itemInput)을 비우기
+-->
+<html lang="ko">
+<head>
+  <!-- [TODO 1] (1주) meta charset -->
+  <meta charset="UTF-8">
+
+  <title>장보기 리스트</title>
+
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;
+           line-height: 1.6; color: #1e293b; background: #f0fdf4; }
+
+    /* [TODO 2] (2주) header 메뉴바: flex / 양끝 / 세로 가운데 /
+       padding 16px 20px / 배경 #16a34a / 모서리 10px */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background-color: #16a34a;
+      border-radius: 10px;
+    }
+
+    .logo { color: white; font-size: 20px; font-weight: bold; }
+    header .sub { color: #bbf7d0; font-size: 14px; }
+
+    .input-row { display: flex; gap: 8px; margin: 20px 0; }
+    #itemInput { flex: 1; padding: 12px; font-size: 16px; border: 2px solid #86efac; border-radius: 8px; }
+    #addBtn { padding: 12px 20px; border: none; border-radius: 8px; background: #16a34a;
+              color: white; cursor: pointer; font-size: 16px; }
+
+    /* [TODO 3] (2주) li 카드: flex / 양끝 / 세로 가운데 /
+       배경 white / padding 14px 16px / margin 8px 0 / 모서리 8px */
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 14px 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    ul { list-style: none; padding: 0; }
+    li button { border: none; background: #ef4444; color: white; padding: 6px 12px;
+                border-radius: 6px; cursor: pointer; }
+    .empty { color: #94a3b8; text-align: center; padding: 20px; }
+    #count { text-align: center; color: #16a34a; font-weight: bold; margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- [TODO 4] (1주) header 안에 div 2개:
+       class="logo" → "🛒 장보기" / class="sub" → "오늘 살 것" -->
+  <header>
+    <div class="logo">🛒 장보기</div>
+    <div class="sub">오늘 살 것</div>
+  </header>
+
+  <main>
+    <div class="input-row">
+      <!-- [TODO 5] (1주) input(id="itemInput", placeholder="살 것 입력") + button(id="addBtn", "추가")
+           (속성 사이는 '공백'으로! 쉼표 X) -->
+      <input id="itemInput" placeholder="살 것 입력">
+      <button id="addBtn">추가</button>
+
+    </div>
+
+    <ul id="itemList"></ul>
+    <div id="count"></div>
+  </main>
+
+
+  <script>
+    /* ===== 만들어 둠 ===== */
+    const itemInput = document.getElementById("itemInput");
+    const addBtn = document.getElementById("addBtn");
+    const itemList = document.getElementById("itemList");
+    const countBox = document.getElementById("count");
+
+    let items = [];
+    const saved = localStorage.getItem("myItems");
+    if (saved) {
+      items = JSON.parse(saved);
+    }
+    function save() {
+      localStorage.setItem("myItems", JSON.stringify(items));
+    }
+
+
+    function render() {
+      itemList.innerHTML = "";
+
+      if (items.length === 0) {
+        itemList.innerHTML = "<p class='empty'>살 것이 없어요 🛒</p>";
+      }
+
+      /* [TODO 6] (3주) for 문 — ★시작은 let i = 0★ (0부터!)
+         조건 i < items.length / 증가 i++ */
+      for (let i = 0; i < items.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = (i + 1) + ". " + items[i];
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "삭제";
+        delBtn.addEventListener("click", function() {
+          items.splice(i, 1);
+          save();
+          render();
+        });
+
+        li.appendChild(delBtn);
+        itemList.appendChild(li);
+      }
+
+      /* [TODO 7] (3주) 개수 메시지 (countBox.textContent = ... 대입!)
+         - items.length > 0 이면: "장바구니에 " + items.length + "개 🛒"
+         - 아니면: "" */
+      if (items.length > 0) {countBox.textContent = "장바구니에 " + items.length + "개 🛒";}
+      else {countBox.textContent = "";}
+
+    }
+
+
+    function addItem() {
+      const text = itemInput.value;
+
+      /* [TODO 8] (4주) 빈 칸이면 추가 안 하기 */
+      if (text === "") {return;}
+
+      /* [TODO 9] (3·4주) 4줄을 직접!
+         ① items 에 text 추가  (★ push(text) 괄호 안에 text! ★)
+         ② save()
+         ③ itemInput 의 value 를 ""  (★ items 가 아니라 itemInput! ★)
+         ④ render() */
+      items.push(text);
+      save();
+      itemInput.value = "";
+      render();
+
+    }
+
+
+    /* [TODO 10] (3주) addBtn 클릭 시 addItem 실행 */
+    addBtn.addEventListener("click", addItem);
+
+    render();
+  </script>
+
+</body>
+</html>

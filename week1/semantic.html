@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+  ============================================
+  1주차 연습 파일 (2) - 시맨틱 태그
+  ============================================
+  목표: header / nav / main / section / footer 로 페이지의 '구조'를 잡아본다.
+
+  사용법:
+  1. 더블클릭해서 브라우저로 열기.
+  2. [TODO] 부분을 채우고 저장(Ctrl+S) → 브라우저 새로고침(F5).
+
+  참고: 시맨틱 태그만 쓰면 디자인이 없어 밋밋해 보여요.
+       눈에 잘 보이라고 아래 <style>에 임시 테두리/배경만 살짝 넣어뒀어요.
+       (style = CSS, 2주차에 제대로 배웁니다. 지금은 신경 X)
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>시맨틱 태그 연습</title>
+  <style>
+    /* 구조가 눈에 보이도록 임시로 넣은 스타일. 2주차에 배워요. */
+    header, nav, main, section, article, footer {
+      border: 2px solid #6366f1;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+    header { background: #eef2ff; }
+    nav    { background: #e0f2fe; }
+    footer { background: #f1f5f9; }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. header: 페이지 맨 위 (제목/로고 영역) -->
+  <header>
+    <h1>정선교의 홈페이지</h1>
+
+    <!-- 2. nav: 메뉴 영역. 보통 링크 목록(ul+li+a)을 넣어요 -->
+    <nav>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#hobby">취미</a></li>
+        <!-- [TODO 1] li 하나 더 추가해서 "연락처" 메뉴를 만들어보세요. -->
+         <li><a href="#contact">연락처</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 3. main: 페이지의 핵심 본문 (한 페이지에 1개만!) -->
+  <main>
+
+    <!-- 4. section: 주제별 구역. "소개" 구역 -->
+    <section id="about">
+      <h2>소개</h2>
+      <p>안녕하세요, 웹개발을 공부하는 정선교입니다.</p>
+    </section>
+
+    <!-- [TODO 2] 아래에 section을 하나 더 만들어보세요.
+         - id 는 "hobby"
+         - 안에 <h2>취미</h2> 제목
+         - 그 아래 <ul> 목록으로 취미 2개(예: 게임, 운동) -->
+    <section id="hobby">
+      <h2>취미</h2>
+      <ul>
+        <li>게임</li>
+        <li>운동</li>
+      </ul>
+    </section>
+
+
+  </main>
+
+  <!-- [TODO 3] 페이지 맨 아래에 footer를 만들고,
+       안에 <p>© 2026 정선교</p> 를 넣어보세요. -->
+<footer>
+  <p>© 2026 정선교</p>
+</footer>
+
+</body>
+</html>

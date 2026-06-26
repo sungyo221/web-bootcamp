@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 연습 파일 (1) - JavaScript 기초 🧠
+  ================================================================
+  목표: 변수(let/const), 자료형(문자열/숫자/불리언), console.log, 계산
+
+  ★ <script> 안의 [TODO]를 채우세요. ★
+  ★ 결과는 (1) 화면 회색 박스 + (2) F12 콘솔 둘 다에 나와요. ★
+
+  사용법:
+  1. [TODO] 채우고 저장(Ctrl+S) → 새로고침(F5)
+  2. F12 눌러 'Console(콘솔)' 탭도 같이 보면 좋아요!
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS 기초 연습</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #output { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+              padding: 16px; min-height: 40px; white-space: pre-line; font-family: Consolas, monospace; }
+    .hint { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🧠 JavaScript 기초</h1>
+  <p class="hint">결과 ↓ (F12 → Console 탭도 함께 보세요)</p>
+  <div id="output">여기에 결과가 나와요</div>
+
+
+  <script>
+    /* =========================================================
+       print() = 화면 박스에 결과를 보여주는 도우미 (미리 만들어 둠)
+       여러분은 console.log() 와 print() 둘 다 써보세요.
+       ========================================================= */
+    function print(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+
+    // 화면 박스 초기화
+    document.getElementById("output").textContent = "";
+
+
+    /* ===== (예시) 변수 만들고 출력하기 ===== */
+    let city = "서울";
+    console.log(city);     // 콘솔에 찍힘
+    print("도시: " + city); // 화면 박스에 찍힘
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] 변수 2개 만들기
+       - let 으로 name 에 본인 이름(문자열, 따옴표!) 담기
+       - const 로 age 에 나이(숫자, 따옴표 없이!) 담기
+       그리고 print() 로 화면에 보여주기:
+         print("이름: " + name);
+         print("나이: " + age); */
+    let name = "정선교";
+    const age = 26;
+    print("이름: " + name);
+    print("나이: " + age);
+
+
+    /* [TODO 2] 숫자 계산하기
+       - let a = 10;  let b = 3;  만들고
+       - print 로 더하기/빼기/곱하기 결과 보여주기:
+         print("10 + 3 = " + (a + b));
+         print("10 - 3 = " + (a - b));
+         print("10 * 3 = " + (a * b));     (곱하기는 * 기호!) */
+    const a = 10;
+    const b = 3;
+    print("10 + 3 = " + (a + b));
+    print("10 - 3 = " + (a - b));
+    print("10 * 3 = " + (a * b));
+
+
+    /* [TODO 3] 불리언(참/거짓)
+       - const isStudent = true;  만들고
+       - print("학생인가요? " + isStudent); 로 보여주기 */
+    const isStudent = true;
+    print("학생인가요? " + isStudent);
+
+
+    /* [TODO 4] 도전! typeof 로 자료형 알아보기
+       typeof 는 값의 '종류'를 알려줘요.
+       - print("name 의 종류: " + typeof name);    (string 나옴)
+       - print("age 의 종류: " + typeof age);       (number 나옴)
+       - print("isStudent 의 종류: " + typeof isStudent);  (boolean 나옴) */
+    print("name 의 종류: " + typeof name);
+    print("age 의 종류: " + typeof age);
+    print("isStudent 의 종류: " + typeof isStudent);
+
+  </script>
+
+</body>
+</html>

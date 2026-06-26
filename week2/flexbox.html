@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 연습 파일 (3) - Flexbox ↔️
+  ================================================================
+  목표: display:flex 로 요소를 '가로로 나란히' 배치하고 정렬하기.
+        (실무에서 제일 많이 쓰는 레이아웃 기술!)
+
+  ★ 구조는 다 있어요. <style> 안의 [TODO]만 채우세요! ★
+  ★★ 숫자엔 꼭 'px'! (복습) ★★
+
+  사용법: [TODO] 채우고 저장(Ctrl+S) → 새로고침(F5).
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Flexbox 연습</title>
+
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 30px auto; line-height: 1.6; }
+
+    /* 상자 안의 칸들이 잘 보이도록 공통 스타일 */
+    .container {
+      background: #f1f5f9;
+      border: 2px dashed #94a3b8;
+      padding: 12px;
+      margin-bottom: 24px;
+    }
+    .item {
+      background: #6366f1;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+
+    /* ===== (예시) display:flex 한 줄이면 가로로 나란히! ===== */
+    #ex-flex {
+      display: flex;
+      gap: 10px;     /* 칸 사이 간격 */
+    }
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] #flex-basic 을 flex 로 만들기 (가로 나란히)
+       - display: flex;
+       - gap: 12px;  (칸 사이 간격) */
+    #flex-basic {
+      display: flex;
+      gap: 12px;
+    }
+
+
+    /* [TODO 2] #flex-center 를 flex + 가운데 정렬
+       - display: flex;
+       - justify-content: center;   (가로 가운데로 모으기)
+       - gap: 12px; */
+    #flex-center {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+
+    /* [TODO 3] #flex-between 을 flex + 양끝으로 벌리기 (← 메뉴바의 핵심!)
+       - display: flex;
+       - justify-content: space-between;  (양끝에 붙이고 사이는 넓게) */
+    #flex-between {
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    /* [TODO 4] 도전! #navbar 를 진짜 메뉴바처럼!
+       - display: flex;
+       - justify-content: space-between;  (로고 왼쪽 / 메뉴 오른쪽)
+       - align-items: center;             (세로 가운데 정렬)
+       - padding: 12px 20px; */
+    #navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Flexbox ↔️</h1>
+  <p>칸들이 <b>가로로 나란히</b> 놓이는 걸 확인하세요.</p>
+
+  <p>① 예시 (display:flex):</p>
+  <div class="container" id="ex-flex">
+    <div class="item">A</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+
+  <p>② [TODO 1] 기본 flex:</p>
+  <div class="container" id="flex-basic">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <p>③ [TODO 2] 가운데 모으기 (justify-content: center):</p>
+  <div class="container" id="flex-center">
+    <div class="item">가운데1</div>
+    <div class="item">가운데2</div>
+  </div>
+
+  <p>④ [TODO 3] 양끝으로 벌리기 (space-between):</p>
+  <div class="container" id="flex-between">
+    <div class="item">왼쪽</div>
+    <div class="item">오른쪽</div>
+  </div>
+
+  <p>⑤ [TODO 4] 진짜 메뉴바:</p>
+  <div class="container" id="navbar">
+    <div class="item">🏠 로고</div>
+    <div class="item">메뉴</div>
+  </div>
+
+</body>
+</html>

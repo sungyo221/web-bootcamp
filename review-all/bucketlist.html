@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  종합 복습 3회차 (1~4주차) - 여행 버킷리스트 ✈️
+  ================================================================
+  이번엔 힌트 최소! 스스로 떠올려서 채우세요.
+  막히면 weekN/summary.html 또는 이전 review-all 파일 참고.
+
+  ★ 체크: ① meta charset ② textContent 대입(=) ③ 따옴표·오타 ④ DOCTYPE 줄 깨끗하게 ★
+-->
+<html lang="ko">
+<head>
+  <!-- [TODO 1] (1주) 한글 안 깨지는 meta 태그 -->
+  <meta charset="UTF-8">
+
+  <title>여행 버킷리스트</title>
+
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;
+           line-height: 1.6; color: #1e293b; background: #ecfeff; }
+
+    /* [TODO 2] (2주) header 메뉴바: flex / 양끝 정렬 / 세로 가운데 /
+       padding 16px 20px / 배경 #0891b2 / 모서리 10px */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background-color: #0891b2;
+      border-radius: 10px;
+    }
+
+    .logo { color: white; font-size: 20px; font-weight: bold; }
+    header .sub { color: #cffafe; font-size: 14px; }
+
+    .input-row { display: flex; gap: 8px; margin: 20px 0; }
+    #placeInput { flex: 1; padding: 12px; font-size: 16px; border: 2px solid #67e8f9; border-radius: 8px; }
+    #addBtn { padding: 12px 20px; border: none; border-radius: 8px; background: #0891b2;
+              color: white; cursor: pointer; font-size: 16px; }
+
+    /* [TODO 3] (2주) li 카드: flex / 양끝 정렬 / 세로 가운데 /
+       배경 white / padding 14px 16px / margin 8px 0 / 모서리 8px */
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 14px 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    ul { list-style: none; padding: 0; }
+    li button { border: none; background: #ef4444; color: white; padding: 6px 12px;
+                border-radius: 6px; cursor: pointer; }
+    .empty { color: #94a3b8; text-align: center; padding: 20px; }
+    #count { text-align: center; color: #0891b2; font-weight: bold; margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- [TODO 4] (1주) header 안에 div 2개:
+       class="logo" → "✈️ 버킷리스트" / class="sub" → "가고 싶은 곳" -->
+  <header>
+    <div class="logo">✈️ 버킷리스트</div>
+    <div class="sub">가고 싶은 곳</div>
+  </header>
+
+  <main>
+    <div class="input-row">
+      <!-- [TODO 5] (1주) input(id="placeInput", placeholder="가고 싶은 곳") + button(id="addBtn", "추가") -->
+      <input type="text" id="placeInput" placeholder="가고 싶은 곳">
+      <button id="addBtn">추가</button>
+
+    </div>
+
+    <ul id="placeList"></ul>
+    <div id="count"></div>
+  </main>
+
+
+  <script>
+    /* ===== 요소 잡기 — 만들어 둠 ===== */
+    const placeInput = document.getElementById("placeInput");
+    const addBtn = document.getElementById("addBtn");
+    const placeList = document.getElementById("placeList");
+    const countBox = document.getElementById("count");
+
+    /* ===== 불러오기 + save() — 만들어 둠 ===== */
+    let places = [];
+    const saved = localStorage.getItem("myPlaces");
+    if (saved) {
+      places = JSON.parse(saved);
+    }
+    function save() {
+      localStorage.setItem("myPlaces", JSON.stringify(places));
+    }
+
+
+    function render() {
+      placeList.innerHTML = "";
+
+      if (places.length === 0) {
+        placeList.innerHTML = "<p class='empty'>버킷리스트가 비었어요 ✈️</p>";
+      }
+
+      /* [TODO 6] (3주) for 문으로 places 를 하나씩 <li> 만들기.
+         for ( ... ) 의 시작·조건·증가를 직접! */
+      for (let i = 0; i < places.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = (i + 1) + ". " + places[i];
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "삭제";
+        delBtn.addEventListener("click", function() {
+          places.splice(i, 1);
+          save();
+          render();
+        });
+
+        li.appendChild(delBtn);
+        placeList.appendChild(li);
+      }
+
+      /* [TODO 7] (3주) 개수 메시지 (★countBox.textContent = ... 대입!★)
+         - places.length 가 0보다 크면: "가고 싶은 곳 " + places.length + "곳 ✈️"
+         - 아니면: "" */
+      if (places.length > 0) {countBox.textContent = "가고 싶은 곳 " + places.length + "곳 ✈️";}
+      else {countBox.textContent = "";}
+
+    }
+
+
+    function addPlace() {
+      const text = placeInput.value;
+
+      /* [TODO 8] (4주) 빈 칸이면 추가 안 하기 */
+      if (text === "") {return;}
+
+      /* [TODO 9] (3·4주) push → save → 입력창 비우기 → render */
+      places.push(text);
+      save();
+      placeInput.value = "";
+      render();
+
+    }
+
+
+    /* [TODO 10] (3주) addBtn 클릭 시 addPlace 실행되게 연결 */
+    addBtn.addEventListener("click", addPlace);
+
+    render();
+  </script>
+
+</body>
+</html>

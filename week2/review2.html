@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 복습 테스트 (2회차) - 맛집 소개 🍜 (review2.html)
+  ================================================================
+  구조는 완성! 디자인은 review2.css 에서 직접!
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>맛집 한그릇 - 국수 전문점</title>
+  <link rel="stylesheet" href="review2.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">🍜 한그릇</div>
+    <nav>
+      <ul>
+        <li><a href="#menu">메뉴</a></li>
+        <li><a href="#time">영업시간</a></li>
+        <li><a href="#book">예약</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="menu">
+      <h2>메뉴</h2>
+      <table>
+        <tr><th>메뉴</th><th>가격</th></tr>
+        <tr><td>잔치국수</td><td>6,000원</td></tr>
+        <tr><td>비빔국수</td><td>7,000원</td></tr>
+        <tr><td>칼국수</td><td>8,000원</td></tr>
+      </table>
+    </section>
+
+    <section id="time">
+      <h2>영업시간</h2>
+      <ul>
+        <li>평일 11:00 ~ 21:00</li>
+        <li>주말 11:00 ~ 22:00</li>
+        <li>매주 월요일 휴무</li>
+      </ul>
+    </section>
+
+    <section id="book">
+      <h2>예약 문의</h2>
+      <form>
+        <label for="name">성함</label>
+        <input type="text" id="name" placeholder="성함">
+        <label for="note">요청사항</label>
+        <textarea id="note" placeholder="요청사항을 적어주세요"></textarea>
+        <button type="submit">예약하기</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 한그릇 · 정선교</p>
+  </footer>
+
+</body>
+</html>

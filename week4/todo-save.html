@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  4주차 미니 프로젝트 - 사라지지 않는 To-do 앱 🚀💾
+  ================================================================
+  3주차 To-do 앱 + localStorage = 새로고침해도 유지되는 진짜 앱!
+
+  핵심: 배열이 바뀔 때마다 localStorage 에 저장(save).
+        페이지 열릴 때 localStorage 에서 불러오기(load).
+        배열은 글자가 아니라서 JSON.stringify / JSON.parse 필요!
+
+  ★ <script> 안의 [TODO]를 채우세요. 어려운 render는 만들어 뒀어요. ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>To-do 앱 (저장 버전)</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 30px auto; line-height: 1.6; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; text-align: center; }
+    .input-row { display: flex; gap: 8px; margin-bottom: 20px; }
+    #todoInput { flex: 1; padding: 12px; font-size: 16px; border: 2px solid #94a3b8; border-radius: 8px; }
+    #addBtn { padding: 12px 20px; font-size: 16px; border: none; border-radius: 8px;
+              background: #6366f1; color: white; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; align-items: center;
+         background: #f1f5f9; padding: 12px 16px; margin: 8px 0; border-radius: 8px; }
+    li button { border: none; background: #ef4444; color: white; padding: 6px 12px;
+                border-radius: 6px; cursor: pointer; }
+    .empty { color: #94a3b8; text-align: center; padding: 20px; }
+    .note { text-align: center; color: #16a34a; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📝 사라지지 않는 할 일</h1>
+  <p class="note">✨ 추가하고 새로고침(F5) 해보세요 — 그대로 남아있어요!</p>
+
+  <div class="input-row">
+    <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+    <button id="addBtn">추가</button>
+  </div>
+
+  <ul id="todoList"></ul>
+
+
+  <script>
+    const input = document.getElementById("todoInput");
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("todoList");
+
+    /* ===== 페이지 열릴 때: 저장된 할 일 불러오기 =====
+       저장된 게 있으면 JSON.parse 로 배열 복원, 없으면 빈 배열. */
+    let todos = [];
+    const saved = localStorage.getItem("myTodos");
+    if (saved) {
+      todos = JSON.parse(saved);   // 글자 → 배열 복원
+    }
+
+
+    /* ===== save(): 현재 배열을 localStorage 에 저장 =====
+       (이 부분은 만들어 뒀어요. TODO 에서 이 함수를 불러서 쓰면 돼요!) */
+    function save() {
+      localStorage.setItem("myTodos", JSON.stringify(todos));   // 배열 → 글자로 저장
+    }
+
+
+    /* ===== render(): 배열을 보고 화면 목록 다시 그리기 (만들어 둠) ===== */
+    function render() {
+      list.innerHTML = "";
+      if (todos.length === 0) {
+        list.innerHTML = "<p class='empty'>할 일이 없어요 🎉</p>";
+        return;
+      }
+      for (let i = 0; i < todos.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = todos[i];
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "삭제";
+        delBtn.addEventListener("click", function() {
+          todos.splice(i, 1);   // 배열에서 제거
+          save();               // ★ 바뀌었으니 저장!
+          render();
+        });
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      }
+    }
+
+
+    /* ===== addTodo(): 입력값을 배열에 추가 ===== */
+    function addTodo() {
+      const text = input.value;
+      if (text === "") { return; }   // 빈 칸 방어
+
+      /* [TODO 1] 배열에 추가하기
+         - todos.push(text); */
+      todos.push(text);
+
+      /* [TODO 2] ★저장하기★ (이게 새로고침에도 남는 핵심!)
+         - save();   // localStorage 에 저장 */
+      save();
+
+      /* [TODO 3] 입력창 비우고 화면 다시 그리기
+         - input.value = "";
+         - render(); */
+      input.value = "";
+      render();
+    }
+
+
+    /* [TODO 4] '추가' 버튼에 addTodo 연결
+       - addBtn.addEventListener("click", addTodo); */
+    addBtn.addEventListener("click", addTodo);
+
+    /* 처음 한 번 그리기 (불러온 할 일들 표시) */
+    render();
+  </script>
+
+</body>
+</html>

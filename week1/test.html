@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  1주차 복습 테스트 (3회차) - test.html 📝
+  ================================================================
+  주제를 또 바꿔서! 이번엔 "내가 좋아하는 카페 소개 페이지"를 만들어요.
+  커닝 없이 스스로! 막히면 물어보세요.
+
+  사용법: [TODO]를 채우고 저장(Ctrl+S) → 브라우저 새로고침(F5).
+
+  ★ 이번 집중 포인트 (지난번 실수 복습) ★
+  - <header> 로 머리말을 '감싸기' (h1, nav 를 그 안에!)
+  - label 의 for = input/textarea 의 id  (글자 하나까지 똑같이!)
+  - 목록은 li,  표는 tr·th·td  (섞지 않기!)
+  - footer 는 </main> 바깥에!
+-->
+<html lang="ko">
+<head>
+  <!-- [TODO 1] 한글 안 깨지는 meta 태그 (charset) -->
+  <meta charset="UTF-8">
+
+  <!-- [TODO 2] title 태그로 탭 제목. 예: 내가 좋아하는 카페 -->
+  <title>내가 좋아하는 카페</title>
+
+  <style>
+    /* 구역이 보이도록 넣은 임시 스타일 (2주차에 배워요) */
+    body { font-family: sans-serif; max-width: 700px; margin: 20px auto; padding: 0 16px; line-height: 1.6; }
+    header, nav, main, section, footer { border: 2px dashed #94a3b8; padding: 12px; margin: 10px 0; border-radius: 8px; }
+    header { background: #eef2ff; }
+    nav { background: #e0f2fe; }
+    footer { background: #f1f5f9; }
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #6366f1; padding: 6px 14px; }
+    th { background: #eef2ff; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 6px; box-sizing: border-box; }
+    button { margin-top: 12px; padding: 8px 18px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== 문제 A. 머리말 ===== -->
+  <!-- [TODO 3] ★header 로 감싸서★ 그 안에:
+       - h1: "내가 좋아하는 카페"
+       - nav > ul > li > a 메뉴 2개: "메뉴"(#menu), "위치"(#location)
+       (주의: h1, nav 를 반드시 <header>...</header> 안에 넣기!) -->
+<header>
+  <h1>내가 좋아하는 카페</h1>
+  <nav>
+    <ul>
+      <li><a href="#menu">메뉴</a></li>
+      <li><a href="#location">위치</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <!-- ===== 문제 B. 본문 ===== -->
+  <!-- [TODO 4] main 을 열고, 아래 두 section을 그 안에 넣으세요.
+       (main 은 footer 전에 반드시 닫기!) -->
+  <main>
+    <section id="menu">
+      <table>
+        <tr>
+          <th>메뉴</th>
+          <th>가격</th>
+        </tr>
+        <tr>
+          <td>아메리카노</td>
+          <td>4500원</td>
+        </tr>
+        <tr>
+          <td>라떼</td>
+          <td>5000원</td>
+        </tr>
+      </table>
+    </section>
+    <section id="location">
+      <h2>찾아오는 길</h2>
+      <ul>
+        <li>지하철 2번 출구</li>
+        <li>도보 5분</li>
+        <li>주차 가능</li>
+      </ul>
+    </section>
+    <form>
+      <label for="name">이름</label>
+      <input type="text" id="name" placeholder="이름을 입력하세요">
+      <label for="review">후기</label>
+      <textarea id="review"></textarea>
+      <button type="submit">남기기</button>
+    </form>
+  </main>
+  <!-- 4-1) 메뉴 구역 (id="menu")
+            - h2: "대표 메뉴"
+            - ★표(table)★: 제목줄(th) 메뉴/가격,  데이터줄(td) 2개 이상
+              예) 아메리카노/4500원, 라떼/5000원 -->
+
+
+  <!-- 4-2) 위치 구역 (id="location")
+            - h2: "찾아오는 길"
+            - ★목록(ul/li)★ 으로 3개: 예) 지하철 2번 출구, 도보 5분, 주차 가능 -->
+
+
+  <!-- [TODO 5] (main 안, 4-2 다음에) form 만들기:
+       - label "이름" + input(type=text),  for/id = "name"  (똑같이!)
+       - label "후기" + textarea,          for/id = "review" (똑같이!)
+       - button type="submit" "남기기" -->
+
+
+
+  <!-- ===== 문제 C. 꼬리말 ===== -->
+  <!-- [TODO 6] ★main 을 닫은 뒤★ footer 를 만들고, 안에 p 로 "© 2026 정선교" -->
+<footer><p>© 2026 정선교</p></footer>
+
+
+</body>
+</html>

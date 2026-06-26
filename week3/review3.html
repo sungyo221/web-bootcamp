@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  3주차 복습 테스트 (3회차) - 영화 추천 🎬
+  ================================================================
+  변수·조건·반복·함수·배열·DOM 종합. 코드는 스스로!
+  ★ 점검 포인트: 번호는 (i+1) / 줄 끝 세미콜론 ; / 문자열은 "따옴표" ★
+
+  <script> 안의 [TODO]를 채우세요.
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3주차 복습 3회차</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.7; text-align: center; }
+    h1 { color: #f7df1e; background: #323330; padding: 12px 20px; border-radius: 8px; }
+    #output { background: #f1f5f9; border: 2px solid #94a3b8; border-radius: 8px;
+              padding: 16px; min-height: 40px; white-space: pre-line; font-family: Consolas, monospace; text-align: left; }
+    button { font-size: 16px; padding: 12px 24px; margin: 10px; border: none;
+             border-radius: 8px; background: #6366f1; color: white; cursor: pointer; }
+    .hint { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎬 영화 추천 복습</h1>
+  <p class="hint">결과 ↓ (복습 5는 버튼 클릭)</p>
+  <div id="output"></div>
+  <button id="likeBtn">추천 👍</button>
+
+  <script>
+    function print(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+    document.getElementById("output").textContent = "";
+
+
+    /* ================= 복습 시작! ================= */
+
+    /* [복습 1] 변수
+       - const 로 제목 에 좋아하는 영화 제목(문자열) 담기
+       - let 로 평점 에 숫자(예: 9) 담기
+       - print 로 "영화: ___, 평점: ___점" 한 줄 출력 (+ 로 연결, 줄 끝 ;) */
+    const 좋아하는_영화_제목 = "루시퍼";
+    let 평점 = 6;
+    print("영화: " + 좋아하는_영화_제목 + ", 평점: "+ 평점);
+
+    /* [복습 2] 배열 + length
+       - let 영화목록 = ["인셉션", "기생충", "인터스텔라"];  만들고
+       - print("추천 영화 " + 영화목록.length + "편"); */
+    let 영화목록 = ["인셉션", "기생충", "인터스텔라"];
+    print("추천 영화" + 영화목록.length + "편");
+
+
+    /* [복습 3] 배열 + 반복문 (★번호 붙이기 i+1★)
+       - for 반복으로 "1. 인셉션" 형태로 전부 출력
+         (힌트: (i + 1) + ". " + 영화목록[i]) */
+    for (let i = 0; i < 영화목록.length; i++){
+      print((i + 1) + ". " + 영화목록[i]);
+    }
+
+
+    /* [복습 4] 함수 + return + 조건문 (평점 등급기)
+       - function 등급(점수) 를 만들고:
+           8 이상이면 "추천", 5 이상이면 "보통", 그 외 "비추천" 을 return
+           (else if 를 쓰세요!)
+       - print("9점: " + 등급(9));   // 추천
+       - print("6점: " + 등급(6));   // 보통
+       - print("3점: " + 등급(3));   // 비추천 */
+    function 등급(점수){
+      if (점수 >= 8) {return "추천";}
+      else if (점수 >=5) {return "보통";}
+      else {return "비추천";}
+    }
+    print("9점: " + 등급(9));
+    print("6점: " + 등급(6));
+    print("3점: " + 등급(3));
+
+
+    /* [복습 5] DOM + 이벤트
+       - id 가 "likeBtn" 인 버튼을 잡아서
+       - 클릭하면 print("이 영화를 추천했어요! 👍") 가 실행되게 연결 */
+    const btn = document.getElementById("likeBtn");
+    btn.addEventListener("click", function() {
+      print("이 영화를 추천했어요! 👍");
+    });
+
+  </script>
+
+</body>
+</html>

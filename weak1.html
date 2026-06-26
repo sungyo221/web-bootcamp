@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  1주차 정리 (치트시트) - summary.html 📑
+  ================================================================
+  1주차에 배운 HTML 개념을 한 장에 모았어요.
+  까먹으면 더블클릭해서 펼쳐보세요. (읽기용 - 채울 TODO 없음)
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>1주차 정리 - HTML 기초</title>
+  <style>
+    body { font-family: sans-serif; max-width: 820px; margin: 0 auto; padding: 24px;
+           line-height: 1.7; color: #1e293b; background: #f8fafc; }
+    h1 { text-align: center; }
+    h2 { border-bottom: 3px solid #6366f1; padding-bottom: 6px; margin-top: 40px; color: #4338ca; }
+    h3 { color: #0f172a; margin-bottom: 4px; }
+    .card { background: white; border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    code { background: #eef2ff; color: #4338ca; padding: 2px 6px; border-radius: 4px;
+           font-family: Consolas, monospace; }
+    pre { background: #1e293b; color: #e2e8f0; padding: 14px 16px; border-radius: 8px;
+          overflow-x: auto; font-size: 0.9em; }
+    pre code { background: none; color: inherit; padding: 0; }
+    table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
+    th { background: #eef2ff; }
+    .tip { background: #fef9c3; border-left: 4px solid #eab308; padding: 10px 16px;
+           border-radius: 6px; margin: 12px 0; }
+    .badge { display: inline-block; background: #6366f1; color: white; font-size: 0.8em;
+             padding: 2px 10px; border-radius: 999px; margin-right: 6px; }
+    .intro { text-align: center; color: #64748b; }
+  </style>
+</head>
+
+<body>
+
+  <h1>📑 1주차 정리 — HTML 기초</h1>
+  <p class="intro">웹 페이지의 <b>뼈대(구조)</b>를 만드는 HTML. 1주차에 배운 모든 것을 모았어요.</p>
+
+  <!-- ===== 0. 웹 동작 원리 ===== -->
+  <h2>0. 웹은 어떻게 동작할까?</h2>
+  <div class="card">
+    <p><b>클라이언트</b>(내 브라우저)가 <b>서버</b>에게 "이 페이지 줘!"라고 <b>요청(request)</b>하면,
+       서버가 HTML 파일을 <b>응답(response)</b>으로 보내줘요. 이 약속을 <code>HTTP</code>(보안 강화 버전 <code>HTTPS</code>)라고 해요.</p>
+    <table>
+      <tr><th>언어</th><th>역할</th><th>비유</th></tr>
+      <tr><td><code>HTML</code></td><td>구조 / 뼈대</td><td>몸의 뼈</td></tr>
+      <tr><td><code>CSS</code></td><td>디자인 / 꾸미기</td><td>옷, 화장</td></tr>
+      <tr><td><code>JavaScript</code></td><td>동작 / 기능</td><td>움직임, 행동</td></tr>
+    </table>
+    <p>이번 주는 <b>HTML(뼈대)</b>만 배웠어요. 2주차엔 CSS로 꾸며요!</p>
+  </div>
+
+  <!-- ===== 1. 기본 뼈대 ===== -->
+  <h2>1. HTML 기본 뼈대</h2>
+  <div class="card">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;      &lt;!-- 한글 안 깨지게 --&gt;
+  &lt;title&gt;탭에 뜨는 제목&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- 화면에 보이는 내용은 전부 여기 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <ul>
+      <li><code>head</code> = 눈에 안 보이는 정보(제목, 인코딩 등)</li>
+      <li><code>body</code> = 화면에 보이는 실제 내용</li>
+    </ul>
+    <div class="tip">💡 <code>&lt;meta charset="UTF-8"&gt;</code> 를 빼먹으면 한글이 깨져요(����).</div>
+  </div>
+
+  <!-- ===== 2. 기본 태그 ===== -->
+  <h2>2. 자주 쓰는 기본 태그</h2>
+  <div class="card">
+    <table>
+      <tr><th>태그</th><th>뜻</th><th>예시</th></tr>
+      <tr><td><code>h1</code> ~ <code>h6</code></td><td>제목 (1이 가장 큼)</td><td><code>&lt;h1&gt;큰 제목&lt;/h1&gt;</code></td></tr>
+      <tr><td><code>p</code></td><td>문단(글)</td><td><code>&lt;p&gt;내용&lt;/p&gt;</code></td></tr>
+      <tr><td><code>a</code></td><td>링크</td><td><code>&lt;a href="주소"&gt;글자&lt;/a&gt;</code></td></tr>
+      <tr><td><code>img</code></td><td>이미지 (닫는 태그 없음)</td><td><code>&lt;img src="주소" alt="설명"&gt;</code></td></tr>
+    </table>
+    <div class="tip">💡 <b>같은 페이지 안 이동</b>: <code>&lt;a href="#menu"&gt;</code> → <code>id="menu"</code> 인 곳으로 점프!</div>
+  </div>
+
+  <!-- ===== 3. 목록 vs 표 ===== -->
+  <h2>3. 목록과 표 (헷갈렸던 부분! ⚠️)</h2>
+  <div class="card">
+    <h3>📋 목록 — <code>ul</code> / <code>li</code></h3>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;게임&lt;/li&gt;
+  &lt;li&gt;운동&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    <p><code>ul</code>=목록 전체, <code>li</code>=항목 하나. (순서 있으면 <code>ol</code>)</p>
+
+    <h3 style="margin-top:20px;">📊 표 — <code>table</code> / <code>tr</code> / <code>th</code> / <code>td</code></h3>
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;메뉴&lt;/th&gt;&lt;th&gt;가격&lt;/th&gt;&lt;/tr&gt;   &lt;!-- 제목줄: th --&gt;
+  &lt;tr&gt;&lt;td&gt;아메리카노&lt;/td&gt;&lt;td&gt;4500원&lt;/td&gt;&lt;/tr&gt;  &lt;!-- 데이터: td --&gt;
+&lt;/table&gt;</code></pre>
+    <table>
+      <tr><th>태그</th><th>역할</th></tr>
+      <tr><td><code>tr</code></td><td>가로줄 (table row)</td></tr>
+      <tr><td><code>th</code></td><td>제목 칸 (굵게+가운데, table header)</td></tr>
+      <tr><td><code>td</code></td><td>데이터 칸 (table data)</td></tr>
+    </table>
+    <div class="tip">⚠️ <b>섞지 않기!</b> 목록은 <code>li</code> 만, 표는 <code>tr·th·td</code> 만!</div>
+  </div>
+
+  <!-- ===== 4. 폼 ===== -->
+  <h2>4. 폼 (입력 양식)</h2>
+  <div class="card">
+<pre><code>&lt;form&gt;
+  &lt;label for="name"&gt;이름&lt;/label&gt;
+  &lt;input type="text" id="name"&gt;
+
+  &lt;label for="review"&gt;후기&lt;/label&gt;
+  &lt;textarea id="review"&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;보내기&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+    <table>
+      <tr><th>태그</th><th>역할</th></tr>
+      <tr><td><code>label</code></td><td>입력칸 설명 글자</td></tr>
+      <tr><td><code>input</code></td><td>한 줄 입력 (type으로 종류 결정)</td></tr>
+      <tr><td><code>textarea</code></td><td>여러 줄 입력</td></tr>
+      <tr><td><code>button</code></td><td>버튼 (<code>type="submit"</code>=제출)</td></tr>
+    </table>
+    <p><b>input type 종류:</b>
+      <code>text</code> · <code>email</code> · <code>password</code> · <code>number</code> · <code>date</code> · <code>checkbox</code></p>
+    <div class="tip">⚠️ <b>핵심!</b> <code>label</code>의 <code>for</code> = <code>input</code>의 <code>id</code> 를
+      <b>글자 하나까지 똑같이</b> 맞춰야 짝이 돼요. (예: <code>for="name"</code> ↔ <code>id="name"</code>)</div>
+  </div>
+
+  <!-- ===== 5. 시맨틱 태그 ===== -->
+  <h2>5. 시맨틱 태그 (페이지 구조)</h2>
+  <div class="card">
+    <p>그냥 <code>div</code> 대신 <b>의미 있는 이름의 상자</b>로 페이지를 나눠요.</p>
+<pre><code>&lt;header&gt;     머리말 (제목 h1 + 메뉴 nav)
+&lt;nav&gt;        메뉴 (보통 ul+li+a)
+&lt;main&gt;       본문 핵심 (★페이지에 1개만!★)
+  &lt;section&gt;  주제별 구역
+&lt;footer&gt;     꼬리말 (저작권 등)</code></pre>
+    <table>
+      <tr><th>태그</th><th>위치/역할</th></tr>
+      <tr><td><code>header</code></td><td>맨 위 머리말 — h1·nav를 안에 <b>감싸기</b></td></tr>
+      <tr><td><code>nav</code></td><td>메뉴 모음</td></tr>
+      <tr><td><code>main</code></td><td>본문 (한 페이지 1개)</td></tr>
+      <tr><td><code>section</code></td><td>주제별 구역</td></tr>
+      <tr><td><code>footer</code></td><td>맨 아래 꼬리말</td></tr>
+    </table>
+    <div class="tip">⚠️ <b>자주 한 실수 2가지</b><br>
+      1) <code>h1</code>·<code>nav</code>는 반드시 <code>&lt;header&gt;...&lt;/header&gt;</code> <b>안에</b> 넣기<br>
+      2) <code>footer</code>는 <code>&lt;/main&gt;</code> <b>바깥</b>(뒤)에 두기</div>
+  </div>
+
+  <!-- ===== 6. 전체 골격 ===== -->
+  <h2>6. 전체 골격 한눈에 보기</h2>
+  <div class="card">
+<pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;제목&lt;/h1&gt;
+    &lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="#menu"&gt;메뉴&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section id="menu"&gt; ... &lt;/section&gt;
+    &lt;form&gt; ... &lt;/form&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;&lt;p&gt;© 2026 정선교&lt;/p&gt;&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+  </div>
+
+  <!-- ===== 작업 흐름 ===== -->
+  <h2>🔁 작업 흐름 & 도구</h2>
+  <div class="card">
+    <p><span class="badge">1</span> 코드 수정 →
+       <span class="badge">2</span> 저장 <code>Ctrl+S</code> →
+       <span class="badge">3</span> 브라우저 새로고침 <code>F5</code></p>
+    <p><b>도구:</b> 코드 편집은 <code>VS Code</code>, 확인은 브라우저, 검사는 개발자도구(<code>F12</code>)</p>
+  </div>
+
+  <p style="text-align:center; margin-top:40px; color:#64748b;">
+    ✅ 1주차 완료! 다음은 <b>2주차 CSS</b> — 이 밋밋한 페이지를 예쁘게 꾸며요. 🎨
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  2주차 복습 테스트 (3회차) - 헬스장 💪 (review3.html)
+  ================================================================
+  구조는 완성! 디자인은 review3.css 에서 직접!
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>파워짐 - 24시 헬스장</title>
+  <link rel="stylesheet" href="review3.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">💪 파워짐</div>
+    <nav>
+      <ul>
+        <li><a href="#price">요금</a></li>
+        <li><a href="#hours">운영시간</a></li>
+        <li><a href="#signup">등록</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="price">
+      <h2>회원권 요금</h2>
+      <table>
+        <tr><th>기간</th><th>가격</th></tr>
+        <tr><td>1개월</td><td>50,000원</td></tr>
+        <tr><td>3개월</td><td>130,000원</td></tr>
+        <tr><td>6개월</td><td>240,000원</td></tr>
+      </table>
+    </section>
+
+    <section id="hours">
+      <h2>운영 시간</h2>
+      <ul>
+        <li>연중무휴 24시간 운영</li>
+        <li>샤워실 06:00 ~ 23:00</li>
+        <li>PT 예약제 운영</li>
+      </ul>
+    </section>
+
+    <section id="signup">
+      <h2>회원 등록</h2>
+      <form>
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="이름">
+        <label for="goal">운동 목표</label>
+        <textarea id="goal" placeholder="목표를 적어주세요"></textarea>
+        <button type="submit">등록하기</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 파워짐 · 정선교</p>
+  </footer>
+
+</body>
+</html>
