@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  7주차 연습 파일 (1) - React 첫걸음 ⚛️
+  ================================================================
+  목표: 컴포넌트(화면 조각)를 만들고 화면에 그리기 + JSX 익히기.
+  핵심: 컴포넌트 = 'JSX를 return 하는 함수'. 이름은 대문자로 시작!
+
+  ★ 설치 없이 CDN으로 React 사용 (인터넷 필요) ★
+  ★ <script type="text/babel"> 안의 [TODO]를 채우세요 ★
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>React 첫걸음</title>
+
+  <!-- React 본체 + JSX 변환기(Babel)를 인터넷에서 불러오기 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; line-height: 1.6; padding: 0 16px; }
+    .card { background: #eef2ff; border-radius: 12px; padding: 20px; margin: 12px 0; }
+    h1 { color: #4338ca; }
+    button { font-size: 16px; padding: 10px 20px; border: none; border-radius: 8px;
+             background: #6366f1; color: white; cursor: pointer; }
+  </style>
+</head>
+
+<body>
+
+  <!-- React가 화면을 그려넣을 '도화지' (여기 안에 컴포넌트들이 들어가요) -->
+  <div id="root"></div>
+
+
+  <script type="text/babel">
+
+    /* ===== (예시) Welcome 컴포넌트 =====
+       컴포넌트 = JSX를 return 하는 함수. 이름 첫 글자는 ★대문자★! */
+    function Welcome() {
+      return (
+        <div className="card">
+          <h1>안녕하세요! 👋</h1>
+          <p>제 첫 React 컴포넌트예요.</p>
+        </div>
+      );
+    }
+
+
+    /* ================= 여러분 차례! ================= */
+
+    /* [TODO 1] Profile 이라는 컴포넌트를 만드세요 (이름 대문자 P!)
+       - <div className="card"> 안에
+         - <h1> 본인 이름 </h1>
+         - <p> 한 줄 소개 </p>
+       형태로 JSX를 return 하기.
+       (예시 Welcome 을 그대로 따라하면 돼요!) */
+        function Profile(){
+          return(
+          <div className="card">
+            <h1> 본인 이름 </h1>
+            <p> 한 줄 소개 </p>
+          </div>
+        );
+        }
+
+
+    /* ===== App: 위 컴포넌트들을 한데 모으는 큰 컴포넌트 ===== */
+    function App() {
+      return (
+        <div>
+          <Welcome />
+
+          {/* [TODO 2] 여기에 <Profile /> 을 추가해서 화면에 나오게 하세요.
+              (만든 컴포넌트는 <이름 /> 형태로 불러요. HTML 태그처럼!) */}
+            <Profile />
+
+          {/* [TODO 3] 도전: <Welcome /> 을 한 번 더 써보세요.
+              같은 컴포넌트를 여러 번 재사용할 수 있어요! */}
+            <Welcome />
+        </div>
+      );
+    }
+
+
+    /* ===== 화면에 그리기 (이 부분은 그대로 두세요) ===== */
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+
+  </script>
+
+</body>
+</html>
