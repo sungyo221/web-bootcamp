@@ -1,37 +1,50 @@
 // ============================================================
-// 8주차 복습 2회차 - 상품 목록 🛍️
+// 9주차 - React ↔ 내 서버 연결 (풀스택!) 🔗
 // ============================================================
-// 파일 분리(import/export) + 데이터 배열 → 컴포넌트 목록 (스스로!)
-// ★ 저장하면 자동 새로고침. [복습]을 채우세요. ★
+// 내 Express 서버(3000)의 /api/products 를 fetch 해서 화면에 그려요.
+//
+// 새 개념: useEffect = "컴포넌트가 처음 화면에 뜰 때 한 번 실행" (예: 데이터 불러오기)
+// ★ 서버(3000)와 React 서버(5173) 둘 다 켜져 있어야 해요! ★
 
-// [복습 1] ProductCard 를 가져오세요 (import ... from "./components/ProductCard")
+import { useState, useEffect } from "react";
 import ProductCard from "./components/ProductCard";
 
 const wrap = { fontFamily: "sans-serif", maxWidth: "500px", margin: "30px auto", padding: "0 16px" };
 
-// 상품 데이터 (객체들의 배열) — 이미 채움
-const products = [
-  { name: "키보드", price: 35000 },
-  { name: "마우스", price: 18000 },
-  { name: "모니터", price: 250000 },
-  { name: "헤드셋", price: 89000 },
-];
-
 function App() {
+  // 서버에서 받아온 상품들을 담을 state (처음엔 빈 배열)
+  const [products, setProducts] = useState([]);
+
+  // ===== useEffect: 화면이 처음 뜰 때 서버에서 상품 불러오기 =====
+  useEffect(() => {
+    // 이 안이 '처음 한 번' 실행돼요.
+    async function loadProducts() {
+
+      /* [TODO 1] 내 서버의 상품 API 를 fetch 하기 (5주차 fetch 3줄 공식!)
+         - const res = await fetch("http://localhost:3000/api/products");
+         - const data = await res.json();
+         - setProducts(data);     // 받은 데이터를 state 에 저장 → 화면 갱신! */
+      const res = await fetch("http://localhost:3000/api/products");
+      const data = await res.json();
+      setProducts(data);
+
+    }
+    loadProducts();
+  }, []);   // ← 이 빈 배열 [] = "처음 한 번만 실행" 이라는 뜻
+
   return (
     <div style={wrap}>
-      <h1>🛍️ 오늘의 상품</h1>
+      <h1>🔗 내 서버의 상품 (풀스택!)</h1>
+      <p style={{ color: "#64748b" }}>← 이 데이터는 내가 만든 서버(3000)에서 온 거예요!</p>
 
-      {/* [복습 2] products 배열을 .map() 으로 돌려 <ProductCard> 를 전부 만드세요.
-          각 상품(product)의 name 과 price 를 props 로 넘기고, key 도 잊지 말기!
-          (Card / MovieCard 복습 때처럼!) */}
-      {products.map((cards, index) => (
-        <ProductCard
-          key={index}
-          name={cards.name}
-          price={cards.price}
-        />
+      {/* [TODO 2] products 를 .map() 으로 돌려 <ProductCard> 목록 만들기 (8주차!)
+          {products.map((product, index) => (
+            <ProductCard key={index} name={product.name} price={product.price} />
+          ))} */}
+      {products.map((products, index) => (
+        <ProductCard key={index} name={products.name} price={products.price}/>
       ))}
+
     </div>
   );
 }
