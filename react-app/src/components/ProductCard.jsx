@@ -1,27 +1,35 @@
 // ============================================================
-// ProductCard 컴포넌트 (자기 파일!) - 8주차 복습 2회차 [TODO]
+// ProductCard 컴포넌트 - 삭제 버튼 포함
 // ============================================================
-// 이 컴포넌트는 props 로 name(상품명) 과 price(가격) 를 받아요.
-// 스스로 완성하세요! (Card.jsx / MovieCard.jsx 참고)
+// props: name, price, onDelete (삭제 버튼 눌렀을 때 실행할 함수)
 
 const cardStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
   background: "white",
   border: "1px solid #e2e8f0",
   borderRadius: "12px",
-  padding: "16px 20px",
-  margin: "12px 0",
+  padding: "12px 20px",
+  margin: "10px 0",
   boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
 };
+const delStyle = {
+  border: "none", background: "#ef4444", color: "white",
+  padding: "6px 12px", borderRadius: "6px", cursor: "pointer",
+};
 
-// [복습 A] ProductCard 함수를 만들어 (props 받기) 아래를 return 하세요:
-//   <div style={cardStyle}>
-//     <h2>{props.name}</h2>
-//     <p>{props.price}원</p>
-//   </div>
-  function ProductCard(props) {
-    return <div style={cardStyle}><h2>{props.name}</h2><p>{props.price}원</p></div>
-  }
+function ProductCard(props) {
+  return (
+    <div style={cardStyle}>
+      <div>
+        <h3 style={{ margin: 0 }}>{props.name}</h3>
+        <p style={{ margin: "4px 0 0", color: "#64748b" }}>{props.price}원</p>
+      </div>
+      {/* onDelete 는 App 에서 넘겨준 '삭제 함수' */}
+      <button style={delStyle} onClick={props.onDelete}>삭제</button>
+    </div>
+  );
+}
 
-
-// [복습 B] ProductCard 를 내보내기 (export default)
 export default ProductCard;
