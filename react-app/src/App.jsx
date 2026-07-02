@@ -1,78 +1,82 @@
 // ============================================================
-// 9주차 - 풀스택 CRUD (읽기 + 추가 + 삭제) 🔗
+// 9주차 복습 - 회원 명단 (풀스택 CRUD) 📇
 // ============================================================
-// ★ 서버(3000) + React(5173) 둘 다 켜져 있어야 함! ★
+// 서버(3000)의 /api/members 를 읽고(GET) · 추가(POST) · 삭제(DELETE)
+// ★ 서버 + React 둘 다 켜져 있어야 함! ★
 
 import { useState, useEffect } from "react";
-import ProductCard from "./components/ProductCard";
 
-const wrap = { fontFamily: "sans-serif", maxWidth: "500px", margin: "30px auto", padding: "0 16px" };
+const wrap = { fontFamily: "sans-serif", maxWidth: "460px", margin: "30px auto", padding: "0 16px" };
 const row = { display: "flex", gap: "8px", marginBottom: "16px" };
 const inputS = { flex: 1, padding: "10px", fontSize: "15px", border: "2px solid #cbd5e1", borderRadius: "8px" };
-const btnS = { padding: "10px 18px", border: "none", borderRadius: "8px", background: "#16a34a", color: "white", cursor: "pointer" };
+const btnS = { padding: "10px 18px", border: "none", borderRadius: "8px", background: "#6366f1", color: "white", cursor: "pointer" };
+const liS = { display: "flex", justifyContent: "space-between", alignItems: "center", background: "#f1f5f9", padding: "12px 16px", margin: "8px 0", borderRadius: "8px" };
+const delS = { border: "none", background: "#ef4444", color: "white", padding: "6px 12px", borderRadius: "6px", cursor: "pointer" };
 
-const API = "http://localhost:3000/api/products";
+const API = "http://localhost:3000/api/members";
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [members, setMembers] = useState([]);
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
 
-  // 읽기 (GET)
+  // ===== (예시) 읽기 GET =====
   useEffect(() => {
     async function load() {
       const res = await fetch(API);
       const data = await res.json();
-      setProducts(data);
+      setMembers(data);
     }
     load();
   }, []);
 
-  // 추가 (POST)
-  async function addProduct() {
-    if (name === "" || price === "") return;
+  // ===== [복습 1] 추가 (POST) =====
+  async function addMember() {
+    if (name === "") return;
+
+    /* [복습 1] 서버로 POST (이름만 보냄) → 돌아온 회원을 받아 화면에 추가 + 입력창 비우기
+       - const res = await fetch(API, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({ name: name }),
+         });
+       - const newMember = await res.json();
+       - setMembers([...members, newMember]);
+       - setName(""); */
     const res = await fetch(API, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name, price: Number(price) }),
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name:name}),
     });
-    const newProduct = await res.json();
-    setProducts([...products, newProduct]);
+    const newMember = await res.json();
+    setMembers([...members, newMember]);
     setName("");
-    setPrice("");
   }
 
-  // ===== [TODO] 삭제 (DELETE) =====
-  async function deleteProduct(id) {
+  // ===== [복습 2] 삭제 (DELETE) =====
+  async function deleteMember(id) {
 
-    /* [TODO 1] 서버에 삭제 요청 보내기
-       - 주소 끝에 id 를 붙여요: `${API}/${id}`
-       - await fetch(`${API}/${id}`, { method: "DELETE" }); */
+    /* [복습 2] 서버에 DELETE 요청 + 화면에서도 빼기
+       - await fetch(`${API}/${id}`, { method: "DELETE" });
+       - setMembers(members.filter((m) => m.id !== id)); */
     await fetch(`${API}/${id}`, {method: "DELETE"});
-
-    /* [TODO 2] 화면에서도 그 상품 빼기 (id 다른 것만 남기기)
-       - setProducts(products.filter((p) => p.id !== id)); */
-    setProducts(products.filter((p) => p.id !== id));
+    setMembers(members.filter((m) => m.id !== id));
   }
 
   return (
     <div style={wrap}>
-      <h1>🔗 풀스택 상품 관리</h1>
+      <h1>📇 회원 명단</h1>
 
       <div style={row}>
-        <input style={inputS} value={name} onChange={(e) => setName(e.target.value)} placeholder="상품명" />
-        <input style={inputS} value={price} onChange={(e) => setPrice(e.target.value)} placeholder="가격" />
-        <button style={btnS} onClick={addProduct}>추가</button>
+        <input style={inputS} value={name} onChange={(e) => setName(e.target.value)} placeholder="회원 이름" />
+        <button style={btnS} onClick={addMember}>추가</button>
       </div>
 
-      {/* 각 카드에 onDelete 로 '그 상품의 id 를 지우는 함수' 를 넘겨요 */}
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          onDelete={() => deleteProduct(product.id)}
-        />
+      {/* 회원 목록 (인라인, 컴포넌트 안 써도 OK) */}
+      {members.map((member) => (
+        <div key={member.id} style={liS}>
+          <span>{member.name}</span>
+          <button style={delS} onClick={() => deleteMember(member.id)}>삭제</button>
+        </div>
       ))}
     </div>
   );
