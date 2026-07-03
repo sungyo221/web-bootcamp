@@ -1,75 +1,88 @@
 // ============================================================
-// 9주차+ - SQLite DB 연동 서버 (진짜 저장!) 🗄️
+// 🎮 게임 백로그 - 포트폴리오 프로젝트 (백엔드)
 // ============================================================
-// 이제 데이터를 파일(members.db)에 저장 → 서버 껐다 켜도 유지!
-// SQL 로 DB 에 명령해요.
+// React + Express + SQLite 로 만드는 게임 관리 API (CRUD)
+// games: id, title, status(하고싶음/하는중/클리어), rating(0~5)
 
 import express from "express";
-import { DatabaseSync } from "node:sqlite";   // Node 내장 SQLite
+import { DatabaseSync } from "node:sqlite";
 
 const app = express();
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });
 app.use(express.json());
 
-// ===== DB 연결 + 테이블 만들기 (제가 세팅) =====
-const db = new DatabaseSync("members.db");   // 이 파일에 저장돼요 (없으면 자동 생성)
-
-// members 테이블 만들기 (없을 때만). id는 자동 증가, name은 글자.
+// ===== DB 연결 + 테이블 (제가 세팅) =====
+const db = new DatabaseSync("games.db");
 db.exec(`
-  CREATE TABLE IF NOT EXISTS members (
+  CREATE TABLE IF NOT EXISTS games (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
+    title TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT '하고싶음',
+    rating INTEGER NOT NULL DEFAULT 0
   )
 `);
-
-// 처음 실행 시 데이터가 없으면 기본 회원 2명 넣기
-const count = db.prepare("SELECT COUNT(*) AS c FROM members").get();
+// 처음이면 예시 게임 2개
+const count = db.prepare("SELECT COUNT(*) AS c FROM games").get();
 if (count.c === 0) {
-  db.prepare("INSERT INTO members (name) VALUES (?)").run("정선교");
-  db.prepare("INSERT INTO members (name) VALUES (?)").run("김철수");
+  db.prepare("INSERT INTO games (title, status, rating) VALUES (?, ?, ?)").run("젤다의 전설", "클리어", 5);
+  db.prepare("INSERT INTO games (title, status, rating) VALUES (?, ?, ?)").run("발더스 게이트 3", "하는중", 4);
 }
 
 
-// ===== (예시) GET: 회원 목록 읽기 (SELECT) =====
-app.get("/api/members", (req, res) => {
-  // .all() = 조건에 맞는 모든 행(row)을 배열로 가져오기
-  const members = db.prepare("SELECT * FROM members").all();
-  res.json(members);
+// ===== (예시) GET: 게임 목록 =====
+app.get("/api/games", (req, res) => {
+  const games = db.prepare("SELECT * FROM games ORDER BY id DESC").all();
+  res.json(games);
 });
 
 
-// ===== [TODO 1] POST: 새 회원 추가 (INSERT) =====
-app.post("/api/members", (req, res) => {
-  const name = req.body.name;
+// ===== [TODO 1] POST: 게임 추가 =====
+app.post("/api/games", (req, res) => {
+  const title = req.body.title;
 
-  /* [TODO 1] SQL 로 새 회원을 DB 에 넣으세요.
-     - const result = db.prepare("INSERT INTO members (name) VALUES (?)").run(name);
-       (? 자리에 name 이 안전하게 들어가요. result.lastInsertRowid = 새로 생긴 id)
-     - res.json({ id: result.lastInsertRowid, name: name }); */
-  const result = db.prepare("INSERT INTO members (name) VALUES (?)").run(name);
-  res.json({id:result.lastInsertRowid, name: name});
+  /* [TODO 1] title 로 새 게임 추가 (status·rating 은 DB 기본값 사용)
+     - const result = db.prepare("INSERT INTO games (title) VALUES (?)").run(title);
+     - const game = db.prepare("SELECT * FROM games WHERE id = ?").get(result.lastInsertRowid);
+     - res.json(game);   // 새로 추가된 게임 전체(기본 status/rating 포함) 응답 */
+  const result = db.prepare("INSERT INTO games (title) VALUES (?)").run(title);
+  const game = db.prepare("SELECT * FROM games WHERE id = ?").get(result.lastInsertRowid);
+  res.json(game);
 
 });
 
 
-// ===== [TODO 2] DELETE: 회원 삭제 (DELETE) =====
-app.delete("/api/members/:id", (req, res) => {
+// ===== [TODO 2] PUT: 게임 상태 수정 (새 개념!) =====
+app.put("/api/games/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const status = req.body.status;   // 바꿀 새 상태
+
+  /* [TODO 2] UPDATE 로 그 게임의 status 를 바꾸세요.
+     - db.prepare("UPDATE games SET status = ? WHERE id = ?").run(status, id);
+     - res.json({ ok: true }); */
+  db.prepare("UPDATE games SET status = ? WHERE id = ?").run(status, id);
+  res.json({ok:true});
+
+});
+
+
+// ===== [TODO 3] DELETE: 게임 삭제 =====
+app.delete("/api/games/:id", (req, res) => {
   const id = Number(req.params.id);
 
-  /* [TODO 2] SQL 로 그 id 회원을 DB 에서 지우세요.
-     - db.prepare("DELETE FROM members WHERE id = ?").run(id);
+  /* [TODO 3] 그 id 게임을 삭제
+     - db.prepare("DELETE FROM games WHERE id = ?").run(id);
      - res.json({ ok: true }); */
-  db.prepare("DELETE FROM members WHERE id = ?").run(id);
+  db.prepare("DELETE FROM games WHERE id = ?").run(id);
   res.json({ok:true});
 
 });
 
 
 app.listen(3000, () => {
-  console.log("✅ SQLite 서버 실행 중! → http://localhost:3000");
+  console.log("🎮 게임 백로그 서버 실행 중! → http://localhost:3000");
 });
