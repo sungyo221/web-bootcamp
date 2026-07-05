@@ -56,16 +56,15 @@ app.post("/api/games", (req, res) => {
 });
 
 
-// ===== [TODO 2] PUT: 게임 상태 수정 (새 개념!) =====
+// ===== PUT: 게임 상태 + 별점 수정 =====
 app.put("/api/games/:id", (req, res) => {
   const id = Number(req.params.id);
-  const status = req.body.status;   // 바꿀 새 상태
+  const status = req.body.status;   // 바꿀 상태
+  const rating = req.body.rating;   // 바꿀 별점
 
-  /* [TODO 2] UPDATE 로 그 게임의 status 를 바꾸세요.
-     - db.prepare("UPDATE games SET status = ? WHERE id = ?").run(status, id);
-     - res.json({ ok: true }); */
-  db.prepare("UPDATE games SET status = ? WHERE id = ?").run(status, id);
-  res.json({ok:true});
+  // 한 번에 status 와 rating 둘 다 갱신 (? 순서대로: status, rating, id)
+  db.prepare("UPDATE games SET status = ?, rating = ? WHERE id = ?").run(status, rating, id);
+  res.json({ ok: true });
 
 });
 
