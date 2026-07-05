@@ -3,7 +3,7 @@
 // ============================================================
 import { useState, useEffect } from "react";
 
-const API = "http://localhost:3000/api/games";
+const API = "https://game-backlog-1pl3.onrender.com/api/games";
 
 const statusColor = { "하고싶음": "#94a3b8", "하는중": "#3b82f6", "클리어": "#22c55e" };
 const nextStatus = { "하고싶음": "하는중", "하는중": "클리어", "클리어": "하고싶음" };
