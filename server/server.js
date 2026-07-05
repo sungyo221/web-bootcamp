@@ -82,6 +82,7 @@ app.delete("/api/games/:id", (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log("🎮 게임 백로그 서버 실행 중! → http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🎮 게임 백로그 서버 실행 중! → 포트 ${PORT}`);
 });
